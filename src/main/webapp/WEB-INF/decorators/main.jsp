@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="main">
-      <decorator:body />
+      <decorator:body/>
     </div>
   </body>
 </html>

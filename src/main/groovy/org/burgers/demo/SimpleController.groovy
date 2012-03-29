@@ -1,4 +1,4 @@
-package org.burgers
+package org.burgers.demo
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.servlet.ModelAndView

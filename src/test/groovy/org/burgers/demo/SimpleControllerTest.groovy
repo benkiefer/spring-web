@@ -1,13 +1,13 @@
-package org.burgers
+package org.burgers.demo
 
 import org.junit.Test
 import org.springframework.web.servlet.ModelAndView
+import org.burgers.demo.SimpleController
 
 class SimpleControllerTest {
     @Test
     void hi(){
-        def result = new SimpleController().howAreYou()
-        assert result.class == ModelAndView
+        ModelAndView result = new SimpleController().howAreYou()
         assert result.getViewName() == "hi"
     }
 
