@@ -1,8 +1,7 @@
-package org.burgers.demo
+package org.burgers.web
 
 import org.junit.Test
 import org.springframework.web.servlet.ModelAndView
-import org.burgers.demo.SimpleController
 
 class SimpleControllerTest {
     @Test

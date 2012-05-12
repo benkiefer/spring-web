@@ -1,4 +1,4 @@
-package org.burgers.demo
+package org.burgers.web
 
 import org.junit.Test
 

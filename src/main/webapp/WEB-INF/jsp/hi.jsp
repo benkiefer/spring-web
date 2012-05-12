@@ -1,5 +1,5 @@
 <head>
-    <title>Demo</title>
+    <title>Spring Web</title>
 </head>
 <body class="contentArea">
     <div id="content">

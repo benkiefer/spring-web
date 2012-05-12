@@ -1,6 +1,4 @@
-package org.burgers.demo
-
-import org.junit.Test
+package org.burgers.web
 
 class ErrorControllerTest extends GroovyTestCase {
   void test_kaboom(){
