@@ -23,18 +23,31 @@ class MovieControllerTest {
 
     @Test
     void movieList(){
-        def movie1 = new Movie(title: "Jaws")
-        def movie2 = new Movie(title: "Jaws 2")
-        def movies = [movie1, movie2]
-
-        mockRepository.demand.save(movie1){}
-        mockRepository.demand.save(movie2){}
+        def movies = []
         mockRepository.demand.findAllMovies(){movies}
         finalizeSetUp()
 
         ModelAndView result = controller.listMovies()
         assert result.viewName == "movieList"
         assert result.model.movies == movies
+    }
+
+    @Test
+    void add(){
+        finalizeSetUp()
+        ModelAndView result = controller.add()
+        assert result.viewName == "addMovie"
+        assert result.model.command.class == Movie
+    }
+
+    @Test
+    void addMovie(){
+        def movie = new Movie(title: "Bob")
+        mockRepository.demand.save(movie){}
+        finalizeSetUp()
+        ModelAndView result = controller.addMovie(movie, null)
+        assert result.viewName == "success"
+        assert result.model.title == "Bob"
     }
 
 }
