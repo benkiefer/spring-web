@@ -8,7 +8,7 @@
 
     <table>
         <tr>
-            <td><form:label path="title">First Name</form:label></td>
+            <td><form:label path="title">Title:</form:label></td>
             <td><form:input path="title" /></td>
         </tr>
     </table>

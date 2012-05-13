@@ -29,4 +29,7 @@ class MovieController {
     ModelAndView add(){
         new ModelAndView("addMovie", "command", new Movie())
     }
+
+    @RequestMapping("/options.do")
+    void options(){}
 }

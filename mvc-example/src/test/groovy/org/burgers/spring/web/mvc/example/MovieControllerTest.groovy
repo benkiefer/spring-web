@@ -6,6 +6,7 @@ import org.junit.Test
 import org.burgers.spring.web.domain.Movie
 import org.springframework.web.servlet.ModelAndView
 import org.junit.Before
+import org.junit.After
 
 class MovieControllerTest {
     MovieController controller
