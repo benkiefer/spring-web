@@ -1,4 +1,4 @@
-package org.burgers.web
+package org.burgers.spring.web.mvc.example
 
 class ErrorControllerTest extends GroovyTestCase {
   void test_kaboom(){

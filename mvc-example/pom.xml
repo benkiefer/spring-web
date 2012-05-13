@@ -56,6 +56,11 @@
                 <scope>provided</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.burgers</groupId>
+                <artifactId>spring-web-domain</artifactId>
+            </dependency>
+
         </dependencies>
 
     <build>

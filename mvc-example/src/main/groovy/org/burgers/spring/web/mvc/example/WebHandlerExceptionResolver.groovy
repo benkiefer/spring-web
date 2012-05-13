@@ -1,4 +1,4 @@
-package org.burgers.web
+package org.burgers.spring.web.mvc.example
 
 import org.springframework.web.servlet.HandlerExceptionResolver
 import org.springframework.web.servlet.ModelAndView

@@ -1,4 +1,4 @@
-package org.burgers.web
+package org.burgers.spring.web.mvc.example
 
 import org.junit.Test
 import org.springframework.web.servlet.ModelAndView
