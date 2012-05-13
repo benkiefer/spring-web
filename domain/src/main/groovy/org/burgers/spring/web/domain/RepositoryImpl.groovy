@@ -31,7 +31,7 @@ class RepositoryImpl implements org.burgers.spring.web.domain.Repository {
         hibernateTemplate.findByExample(movie)[0]
     }
 
-    List<Movie> findAll() {
+    List<Movie> findAllMovies() {
         hibernateTemplate.find("from Movie")
     }
 

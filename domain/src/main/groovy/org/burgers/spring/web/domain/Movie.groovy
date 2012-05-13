@@ -9,7 +9,7 @@ import javax.persistence.Column
 
 @Entity
 @Table(name = "tbtMovie")
-class Movie {
+class Movie implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

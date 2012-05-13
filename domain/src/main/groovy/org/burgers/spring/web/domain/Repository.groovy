@@ -4,6 +4,6 @@ public interface Repository {
     void save(Movie movie)
     void delete(Movie movie)
     Movie findById(Long id)
-    List<Movie> findAll()
+    List<Movie> findAllMovies()
     void deleteAll()
 }
