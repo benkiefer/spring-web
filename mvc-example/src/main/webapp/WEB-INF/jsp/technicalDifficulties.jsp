@@ -1,8 +1,8 @@
 <head>
     <title>Technical Difficulties</title>
 </head>
-<body class="contentArea">
-    <div id="content">
+<body>
+    <div class="contentArea">
 	    <h1>Technical Difficulties</h1>
 	    <p>An error has occurred</p>
     </div>

@@ -3,8 +3,8 @@
 <head>
     <title>Movie List</title>
 </head>
-<body class="contentArea">
-    <div id="content">
+<body>
+    <div class="contentArea">
 	    <h1>Movie List</h1>
 	    <p>Here are the current movies:</p>
 

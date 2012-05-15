@@ -4,12 +4,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
   <head>
-    <title>Stuff</title>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
   </head>
   <body>
-    <div id="main">
+
+    <div class="pageWidth">
+
+      <div id="header">
+        <br/>
+            <p class="headerText">White Box Rentals</p>
+        <br/>
+        <hr />
+      </div>
+
       <decorator:body/>
+
     </div>
+
   </body>
 </html>
