@@ -39,4 +39,8 @@ class RepositoryImpl implements org.burgers.spring.web.domain.Repository {
         hibernateTemplate.bulkUpdate("delete from Movie")
     }
 
+    List<String> findAllMovieTitles(){
+        hibernateTemplate.find("select title from Movie")
+    }
+
 }

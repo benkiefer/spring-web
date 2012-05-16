@@ -6,4 +6,5 @@ public interface Repository {
     Movie findById(Long id)
     List<Movie> findAllMovies()
     void deleteAll()
+    List<String> findAllMovieTitles()
 }

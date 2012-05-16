@@ -5,6 +5,7 @@ import org.junit.runner.RunWith
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.beans.factory.annotation.Autowired
 import org.junit.Test
+import org.junit.After
 
 @RunWith(SpringJUnit4ClassRunner)
 @ContextConfiguration(locations = ["classpath:contexts/DatabaseContext.xml"])
@@ -15,6 +16,17 @@ class RepositoryImplTest {
 
     void setUp() {
         repository.deleteAll()
+    }
+
+    @Test
+    void findAllMovieTitles(){
+        def one = new Movie(title: "bob1")
+        def two = new Movie(title: "bob2")
+        repository.save(one)
+        repository.save(two)
+        def results = repository.findAllMovieTitles()
+        assert results.size() == 2
+        assert results == [one.title, two.title]
     }
 
     @Test
@@ -50,7 +62,7 @@ class RepositoryImplTest {
         assert repository.findById(id).title == "bob"
     }
 
-
+    @After
     void tearDown() {
         repository.deleteAll()
         assert repository.findAllMovies().size() == 0

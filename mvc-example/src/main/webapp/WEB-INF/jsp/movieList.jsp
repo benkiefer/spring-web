@@ -8,11 +8,19 @@
 	    <h1>Movie List</h1>
 	    <p>Here are the current movies:</p>
 
-	    <ul>
+        <table class="dataTable">
+                <tr>
+                    <td class="dataTableColumnHeading">Title:</td>
+                    <td class="dataTableColumnHeading">Rented:</td>
+                <tr>
+
 	            <c:forEach var="movie" items="${movies}" varStatus="status">
-	                    <li>${movie.title}</li>
+	                    <tr class="dataTableRow">
+	                        <td class="dataTableText">${movie.title}</td>
+	                        <td class="dataTableText">${movie.rented}</td>
+                        </tr>
                 </c:forEach>
-	    </ul>
+        </table>
 
     </div>
 </body>
