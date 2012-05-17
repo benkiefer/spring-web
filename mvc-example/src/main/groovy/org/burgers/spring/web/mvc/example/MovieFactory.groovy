@@ -8,7 +8,6 @@ import org.burgers.spring.web.domain.Rating
 class MovieFactory {
     Movie createFrom(MovieCommand command){
         new Movie(title: command.title,
-                rented: command.rented,
                 rating: Rating.valueOf(Rating, command.rating))
     }
 }

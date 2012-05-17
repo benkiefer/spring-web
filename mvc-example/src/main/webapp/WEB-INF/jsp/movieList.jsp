@@ -11,14 +11,12 @@
         <table class="dataTable">
                 <tr>
                     <td class="dataTableColumnHeading">Title:</td>
-                    <td class="dataTableColumnHeading">Rented:</td>
                     <td class="dataTableColumnHeading">Rating:</td>
                 <tr>
 
 	            <c:forEach var="movie" items="${movies}" varStatus="status">
 	                    <tr class="dataTableRow">
 	                        <td class="dataTableText">${movie.title}</td>
-	                        <td class="dataTableText">${movie.rented}</td>
 	                        <td class="dataTableText">${movie.rating}</td>
                         </tr>
                 </c:forEach>

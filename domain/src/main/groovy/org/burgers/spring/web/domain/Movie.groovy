@@ -21,9 +21,6 @@ class Movie {
     @Column(name = "Title")
     String title
 
-    @Column(name = "Rented")
-    boolean rented
-
     @Column(name = "Rating")
     @Enumerated(EnumType.STRING)
     Rating rating

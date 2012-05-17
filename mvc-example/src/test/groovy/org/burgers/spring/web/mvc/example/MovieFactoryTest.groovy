@@ -15,10 +15,9 @@ public class MovieFactoryTest {
 
     @Test
     void createFrom() {
-        def command = new MovieCommand(title: "bob", rented: true, rating: Rating.PG.toString())
+        def command = new MovieCommand(title: "bob", rating: Rating.PG.toString())
         Movie result = factory.createFrom(command)
         assert result.title == command.title
-        assert result.rented == command.rented
         assert result.rating == Rating.PG
     }
 }
