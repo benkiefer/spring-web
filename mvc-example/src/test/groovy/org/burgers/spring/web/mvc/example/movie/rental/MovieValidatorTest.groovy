@@ -1,12 +1,14 @@
-package org.burgers.spring.web.mvc.example
+package org.burgers.spring.web.mvc.example.movie.rental
 
 import org.junit.Before
 import org.junit.Test
-import org.burgers.spring.web.domain.Movie
+
 import org.springframework.validation.BindException
 import groovy.mock.interceptor.MockFor
 import org.burgers.spring.web.domain.Repository
 import org.burgers.spring.web.domain.Rating
+import org.burgers.spring.web.mvc.example.movie.rental.MovieCommand
+import org.burgers.spring.web.mvc.example.movie.rental.MovieValidator
 
 class MovieValidatorTest {
     MovieValidator validator

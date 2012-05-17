@@ -1,4 +1,4 @@
-package org.burgers.spring.web.mvc.example
+package org.burgers.spring.web.mvc.example.movie.rental
 
 class MovieCommand implements Serializable {
     String title

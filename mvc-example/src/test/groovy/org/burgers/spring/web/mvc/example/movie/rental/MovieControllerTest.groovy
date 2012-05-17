@@ -1,4 +1,4 @@
-package org.burgers.spring.web.mvc.example
+package org.burgers.spring.web.mvc.example.movie.rental
 
 import groovy.mock.interceptor.MockFor
 import org.burgers.spring.web.domain.Repository
@@ -6,10 +6,13 @@ import org.junit.Test
 import org.burgers.spring.web.domain.Movie
 import org.springframework.web.servlet.ModelAndView
 import org.junit.Before
-import org.junit.After
-import org.springframework.validation.BindException
+
 import org.springframework.validation.BindingResult
 import org.burgers.spring.web.domain.Rating
+import org.burgers.spring.web.mvc.example.movie.rental.MovieCommand
+import org.burgers.spring.web.mvc.example.movie.rental.MovieController
+import org.burgers.spring.web.mvc.example.movie.rental.MovieFactory
+import org.burgers.spring.web.mvc.example.movie.rental.MovieValidator
 
 class MovieControllerTest {
     MovieController controller

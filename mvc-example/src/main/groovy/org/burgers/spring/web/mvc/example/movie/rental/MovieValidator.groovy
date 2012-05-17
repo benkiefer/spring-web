@@ -1,4 +1,4 @@
-package org.burgers.spring.web.mvc.example
+package org.burgers.spring.web.mvc.example.movie.rental
 
 import org.springframework.validation.Validator
 import org.springframework.stereotype.Component
