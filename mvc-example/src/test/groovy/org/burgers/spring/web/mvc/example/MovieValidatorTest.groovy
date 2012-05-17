@@ -6,6 +6,7 @@ import org.burgers.spring.web.domain.Movie
 import org.springframework.validation.BindException
 import groovy.mock.interceptor.MockFor
 import org.burgers.spring.web.domain.Repository
+import org.burgers.spring.web.domain.Rating
 
 class MovieValidatorTest {
     MovieValidator validator
@@ -83,6 +84,18 @@ class MovieValidatorTest {
         verifyErrorForField "title", "required.title"
     }
 
+    @Test
+    void validate_rating_invalid() {
+        mockRepository.demand.findAllMovieTitles(){[]}
+        finalizeSetUp()
+
+        movie.rating = "Does not exist"
+        validator.validate(movie, exception)
+
+        verifyErrorCount 1
+        verifyErrorForField "rating", "invalid.rating"
+    }
+
     private verifyErrorCount(int count){
         if (count != 0){
             assert exception.errorCount == count
@@ -104,6 +117,6 @@ class MovieValidatorTest {
     }
 
     private MovieCommand createValidMovie(){
-        new MovieCommand(title: "Jaws")
+        new MovieCommand(title: "Jaws", rating: Rating.G.name())
     }
 }

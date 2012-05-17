@@ -19,7 +19,6 @@ class RepositoryImpl implements org.burgers.spring.web.domain.Repository {
     void save(Movie movie) {
         hibernateTemplate.saveOrUpdate(movie)
         hibernateTemplate.flush()
-        sessionFactory.close()
     }
 
     void delete(Movie movie) {

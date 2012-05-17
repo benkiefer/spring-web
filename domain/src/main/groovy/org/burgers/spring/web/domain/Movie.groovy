@@ -6,6 +6,8 @@ import javax.persistence.Id
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Column
+import javax.persistence.Enumerated
+import javax.persistence.EnumType
 
 @Entity
 @Table(name = "tbtMovie")
@@ -21,5 +23,9 @@ class Movie {
 
     @Column(name = "Rented")
     boolean rented
+
+    @Column(name = "Rating")
+    @Enumerated(EnumType.STRING)
+    Rating rating
 
 }

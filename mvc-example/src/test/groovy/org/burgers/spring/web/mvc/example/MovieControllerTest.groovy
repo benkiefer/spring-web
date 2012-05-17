@@ -9,6 +9,7 @@ import org.junit.Before
 import org.junit.After
 import org.springframework.validation.BindException
 import org.springframework.validation.BindingResult
+import org.burgers.spring.web.domain.Rating
 
 class MovieControllerTest {
     MovieController controller
@@ -47,7 +48,8 @@ class MovieControllerTest {
         finalizeSetUp()
         ModelAndView result = controller.add()
         assert result.viewName == "addMovie"
-        assert result.model.command.class == MovieCommand
+        assert result.model.command instanceof MovieCommand
+        assert result.model.ratings == Rating.collect {it.name()}
     }
 
     @Test
@@ -86,6 +88,7 @@ class MovieControllerTest {
         ModelAndView result = controller.onSubmit(movieCommand, mockBindingResult.proxyInstance())
         assert result.viewName == "addMovie"
         assert result.model.command == movieCommand
+        assert result.model.ratings == Rating.collect {it.name()}
     }
 
 }

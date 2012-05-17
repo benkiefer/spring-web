@@ -18,6 +18,15 @@
                     <td><form:label path="rented">Rented:</form:label></td>
                     <td><form:checkbox path="rented" /></td>
                 </tr>
+                <tr>
+                    <td><form:label path="rating">Rating:</form:label></td>
+                    <td>
+                        <form:select path="rating">
+                            <form:option value="NONE" label="--- Select ---"/>
+                            <form:options items="${ratings}"/>
+                        </form:select>
+                    </td>
+                </tr>
             </table>
             <br/>
             <input type="submit"/>
