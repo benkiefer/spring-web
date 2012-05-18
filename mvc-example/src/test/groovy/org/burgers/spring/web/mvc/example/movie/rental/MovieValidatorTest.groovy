@@ -9,11 +9,12 @@ import org.burgers.spring.web.domain.Repository
 import org.burgers.spring.web.domain.Rating
 import org.burgers.spring.web.mvc.example.movie.rental.MovieCommand
 import org.burgers.spring.web.mvc.example.movie.rental.MovieValidator
+import org.burgers.spring.web.domain.Movie
 
 class MovieValidatorTest {
     MovieValidator validator
     private mockRepository
-    MovieCommand movie
+    Movie movie
     BindException exception
 
     @Before
@@ -31,7 +32,7 @@ class MovieValidatorTest {
     @Test
     void supports() {
         finalizeSetUp()
-        assert validator.supports(MovieCommand)
+        assert validator.supports(Movie)
         assert !validator.supports(String)
     }
 
@@ -86,18 +87,6 @@ class MovieValidatorTest {
         verifyErrorForField "title", "required.title"
     }
 
-    @Test
-    void validate_rating_invalid() {
-        mockRepository.demand.findAllMovieTitles(){[]}
-        finalizeSetUp()
-
-        movie.rating = "Does not exist"
-        validator.validate(movie, exception)
-
-        verifyErrorCount 1
-        verifyErrorForField "rating", "invalid.rating"
-    }
-
     private verifyErrorCount(int count){
         if (count != 0){
             assert exception.errorCount == count
@@ -118,7 +107,7 @@ class MovieValidatorTest {
         assert error.defaultMessage == message
     }
 
-    private MovieCommand createValidMovie(){
-        new MovieCommand(title: "Jaws", rating: Rating.G.name())
+    private Movie createValidMovie(){
+        new Movie(title: "Jaws", rating: Rating.G)
     }
 }

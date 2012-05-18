@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
   <head>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/main.css"/>"/>
   </head>
   <body>
 
@@ -16,7 +16,7 @@
             <p class="headerText">White Box Rentals</p>
 
         <ul id="list-nav">
-            <li><a href="<c:url value="options.do"/>">Home</a></li>
+            <li><a href="<c:url value="/options.do"/>">Home</a></li>
             <li><a href="#">TBD...</a></li>
         </ul>
 

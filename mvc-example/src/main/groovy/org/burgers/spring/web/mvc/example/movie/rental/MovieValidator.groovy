@@ -7,6 +7,7 @@ import org.springframework.validation.ValidationUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.burgers.spring.web.domain.Repository
 import org.burgers.spring.web.domain.Rating
+import org.burgers.spring.web.domain.Movie
 
 @Component
 class MovieValidator implements Validator {
@@ -15,16 +16,14 @@ class MovieValidator implements Validator {
     Repository repository
 
     boolean supports(Class<?> aClass) {
-        return MovieCommand.isAssignableFrom(aClass);
+        return Movie.isAssignableFrom(aClass);
     }
 
     void validate(Object target, Errors errors) {
-        MovieCommand movieCommand = (MovieCommand) target
-        if (repository.findAllMovieTitles()?.contains(movieCommand.title)){
-                    errors.rejectValue("title", "unique.title", "Movie: $movieCommand.title already exists.")
+        Movie movie = (Movie) target
+        if (repository.findAllMovieTitles()?.contains(movie.title)){
+                    errors.rejectValue("title", "unique.title", "Movie: $movie.title already exists.")
         }
-
-        if (!Rating.find{it.name() == movieCommand.rating}) errors.rejectValue("rating", "invalid.rating")
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "required.title")
     }

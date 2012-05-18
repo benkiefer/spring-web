@@ -9,29 +9,22 @@ import org.junit.Before
 
 import org.springframework.validation.BindingResult
 import org.burgers.spring.web.domain.Rating
-import org.burgers.spring.web.mvc.example.movie.rental.MovieCommand
-import org.burgers.spring.web.mvc.example.movie.rental.MovieController
-import org.burgers.spring.web.mvc.example.movie.rental.MovieFactory
-import org.burgers.spring.web.mvc.example.movie.rental.MovieValidator
 
 class MovieControllerTest {
     MovieController controller
     private mockRepository
     private mockValidator = [:]
-    private mockFactory
     private mockBindingResult
 
     @Before
     void setUp() {
         controller = new MovieController()
         mockRepository = new MockFor(Repository)
-        mockFactory = new MockFor(MovieFactory)
         mockBindingResult = new MockFor(BindingResult)
     }
 
     void finalizeSetUp(){
         controller.repository = mockRepository.proxyInstance()
-        controller.factory = mockFactory.proxyInstance()
         controller.validator = mockValidator as MovieValidator
     }
 
@@ -51,46 +44,42 @@ class MovieControllerTest {
         finalizeSetUp()
         ModelAndView result = controller.add()
         assert result.viewName == "addMovie"
-        assert result.model.command instanceof MovieCommand
+        assert result.model.command instanceof Movie
         assert result.model.ratings == Rating.collect {it.name()}
     }
 
     @Test
     void addMovie(){
-        def movieCommand = new MovieCommand(title: "Bob")
-        def movie = new Movie()
+        def movie = new Movie(title: "Bob")
 
         mockBindingResult.demand.hasErrors(){false}
         mockBindingResult.demand.hasFieldErrors(){false}
 
-        mockFactory.demand.createFrom(movieCommand){movie}
         mockRepository.demand.save(movie){}
-        mockValidator = [validate: {arg1, arg2 ->
-            assert arg1 == movieCommand
-        }]
+        mockValidator = [validate: {arg1, arg2 -> assert arg1 == movie }]
 
         finalizeSetUp()
 
-        ModelAndView result = controller.onSubmit(movieCommand, mockBindingResult.proxyInstance())
+        ModelAndView result = controller.onSubmit(movie, mockBindingResult.proxyInstance())
         assert result.viewName == "success"
         assert result.model.title == "Bob"
     }
 
     @Test
     void addMovie_with_errors(){
-        def movieCommand = new MovieCommand(title: "Bob")
+        def movie = new Movie(title: "Bob")
 
         mockBindingResult.demand.hasErrors(){true}
 
         mockValidator = [validate: {arg1, arg2 ->
-            assert arg1 == movieCommand
+            assert arg1 == movie
         }]
 
         finalizeSetUp()
 
-        ModelAndView result = controller.onSubmit(movieCommand, mockBindingResult.proxyInstance())
+        ModelAndView result = controller.onSubmit(movie, mockBindingResult.proxyInstance())
         assert result.viewName == "addMovie"
-        assert result.model.command == movieCommand
+        assert result.model.command == movie
         assert result.model.ratings == Rating.collect {it.name()}
     }
 

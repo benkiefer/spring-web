@@ -26,7 +26,7 @@
             </table>
             <br/>
             <input type="submit"/>
-	</form:form>
+	    </form:form>
 
     </div>
 </body>
