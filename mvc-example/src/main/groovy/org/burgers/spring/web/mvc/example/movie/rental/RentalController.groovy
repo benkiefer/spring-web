@@ -10,25 +10,35 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.burgers.spring.web.domain.Repository
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestParam
+import javax.servlet.http.HttpSession
+import org.springframework.validation.BindingResult
+import org.springframework.ui.Model
+import org.burgers.spring.web.domain.Movie
 
 @Controller
-@SessionAttributes("cart")
 @RequestMapping("/rental")
 class RentalController {
     @Autowired Repository repository
+    @Autowired MovieRentalFactory factory
 
     @RequestMapping(value = "/select.do", method = RequestMethod.GET)
-    ModelAndView selectMovie(){
-        def model = [:]
-        model.cart = new ShoppingCart()
-        model.movies = repository.findAllMovies()
-        new ModelAndView("rental/select", model)
+    ModelAndView selectMovie(HttpSession session) {
+        session.setAttribute("cart", new ShoppingCart())
+        def rentals = repository.findAllMovies().collect {factory.createFrom(it)}
+        new ModelAndView("rental/select", "movies", new Rentals(movieRentals: rentals))
     }
 
     @RequestMapping(value = "/select.do", method = RequestMethod.POST)
-    ModelAndView doSubmit(@ModelAttribute ShoppingCart shoppingCart, @RequestParam Long movieId){
-        shoppingCart.addItem(repository.findById(movieId))
-        new ModelAndView("rental/confirm", "cart", shoppingCart)
+    ModelAndView onSubmit(@ModelAttribute("movies") Rentals movies, BindingResult result, HttpSession session) {
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart")
+
+        movies.movieRentals.each {
+            if (it.selected) {
+                cart.addItem(it)
+            }
+        }
+
+        new ModelAndView("rental/confirm")
     }
 
 }

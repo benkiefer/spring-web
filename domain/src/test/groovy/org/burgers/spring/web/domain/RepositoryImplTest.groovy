@@ -56,12 +56,14 @@ class RepositoryImplTest {
 
     @Test
     void findById() {
+        def sam = new Movie(title: "sam", rating: Rating.G)
         def bob = new Movie(title: "bob", rating: Rating.G)
+        repository.save(sam)
         repository.save(bob)
-        def id = repository.findAllMovies()[0].id
-        def result = repository.findById(id)
-        assert result.title == "bob"
-        assert result.rating == Rating.G
+
+        def allMovies = repository.findAllMovies().sort{it.id}
+        assert repository.findById(allMovies[0].id).title == sam.title
+        assert repository.findById(allMovies[1].id).title == bob.title
     }
 
     @After

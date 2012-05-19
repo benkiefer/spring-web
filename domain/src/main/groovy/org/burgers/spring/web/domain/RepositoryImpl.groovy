@@ -26,8 +26,7 @@ class RepositoryImpl implements org.burgers.spring.web.domain.Repository {
     }
 
     Movie findById(Long id) {
-        def movie = new Movie(id: id)
-        hibernateTemplate.findByExample(movie)[0]
+        hibernateTemplate.find("from Movie where id = ?", id)[0]
     }
 
     List<Movie> findAllMovies() {

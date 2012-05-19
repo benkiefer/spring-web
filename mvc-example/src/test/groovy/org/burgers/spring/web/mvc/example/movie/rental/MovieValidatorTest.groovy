@@ -7,8 +7,6 @@ import org.springframework.validation.BindException
 import groovy.mock.interceptor.MockFor
 import org.burgers.spring.web.domain.Repository
 import org.burgers.spring.web.domain.Rating
-import org.burgers.spring.web.mvc.example.movie.rental.MovieCommand
-import org.burgers.spring.web.mvc.example.movie.rental.MovieValidator
 import org.burgers.spring.web.domain.Movie
 
 class MovieValidatorTest {

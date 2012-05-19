@@ -12,7 +12,7 @@
 		    <table>
                 <tr>
                     <td><form:label path="title">Title:</form:label></td>
-                    <td><form:input path="title" /></td>
+                    <td><form:input path="title"/></td>
                 </tr>
                 <tr>
                     <td><form:label path="rating">Rating:</form:label></td>

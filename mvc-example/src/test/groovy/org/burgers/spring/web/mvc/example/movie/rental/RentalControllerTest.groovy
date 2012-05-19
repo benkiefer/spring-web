@@ -7,44 +7,58 @@ import groovy.mock.interceptor.MockFor
 import org.burgers.spring.web.mvc.example.ShoppingCart
 import org.burgers.spring.web.domain.Movie
 
+import org.springframework.mock.web.MockHttpSession
+import org.springframework.validation.BindException
+
 class RentalControllerTest {
     RentalController rentalController
     private mockRepository
+    private mockFactory
+
     @Before
     void setUp() {
         rentalController = new RentalController()
         mockRepository = new MockFor(Repository)
+        mockFactory = new MockFor(MovieRentalFactory)
     }
 
     void finalizeSetUp(){
         rentalController.repository = mockRepository.proxyInstance()
+        rentalController.factory = mockFactory.proxyInstance()
     }
 
     @Test
     void selectMovie() {
-        def movies = [new Movie()]
+        def movie = new Movie()
+        def movies = [movie]
+        def rental = new MovieRental()
 
+        mockFactory.demand.createFrom(movie){ rental }
         mockRepository.demand.findAllMovies(){ movies }
 
         finalizeSetUp()
-        def result = rentalController.selectMovie()
+        def session = new MockHttpSession()
+        def result = rentalController.selectMovie(session)
         assert result.viewName == "rental/select"
-        assert result.model.cart instanceof ShoppingCart
-        assert result.model.movies == movies
+        assert result.model.movies.movieRentals.contains(rental)
+        assert session.getAttribute("cart") instanceof ShoppingCart
     }
 
     @Test
     void doSubmit() {
-        def cart = new ShoppingCart()
-        def movie = new Movie()
+        def session = new MockHttpSession()
+        session.setAttribute("cart", new ShoppingCart())
 
-        mockRepository.demand.findById(1){ movie }
+        def selectedRental = new MovieRental(selected: true)
+        def notSelectedRental = new MovieRental(selected: false)
+
+        def rentals = new Rentals(movieRentals: [notSelectedRental, selectedRental])
+
         finalizeSetUp()
 
-        def result = rentalController.doSubmit(cart, 1)
+        def result = rentalController.onSubmit(rentals, new BindException(rentals,"rentals"), session)
         assert result.viewName == "rental/confirm"
-        assert result.model.cart == cart
-        assert cart.rentals.contains(movie)
+        assert session.getAttribute("cart").rentals.contains(selectedRental)
     }
 
 }

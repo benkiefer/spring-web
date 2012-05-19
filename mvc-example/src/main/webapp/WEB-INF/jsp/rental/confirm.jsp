@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 
 <head>
-    <title>Pick a Movie</title>
+    <title>Review Your Cart</title>
 </head>
 
 <body>
@@ -9,19 +9,24 @@
     <div class="contentArea">
 	    <h1>Review Your Cart</h1>
 
-        <form:form method="POST" action="rental/confirm.do">
-            <form:errors path="*" cssClass="errorblock" element="div" />
+	    <p>You are renting ${cart.itemCount} item(s).</p>
 
-	            <c:forEach var="movie" items="${cart.rentals}" varStatus="status">
-	                    <tr class="dataTableRow">
-	                        <td class="dataTableText">${movie.title}</td>
-	                        <td class="dataTableText">${movie.rating}</td>
-                        </tr>
-                </c:forEach>
+        <table class="dataTable">
+            <tr>
+                <td class="dataTableColumnHeading">Title:</td>
+                <td class="dataTableColumnHeading">Rating:</td>
+            <tr>
 
-            <td class="dataTableText"><input type="submit"/></td>
-        </form:form>
 
+            <c:forEach var="rental" items="${cart.rentals}">
+
+                <tr class="dataTableRow">
+                        <td class="dataTableText">${rental.title}</td>
+                    <td class="dataTableText">${rental.rating}</td>
+                </tr>
+
+            </c:forEach>
+        </table>
     </div>
 
 </body>
