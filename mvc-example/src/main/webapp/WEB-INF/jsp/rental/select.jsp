@@ -2,6 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <head>
     <title>Pick a Movie</title>
+    <script type="text/javascript">
+        function updateCount() {
+            var url = "<c:url value="/rental/count.do"/>";
+            $.getJSON(url, function(data){
+              alert("Got back: " + data);
+              $('#cartCount').text(data);
+            });
+        }
+    </script>
+
 </head>
 
 <body>
@@ -25,7 +35,7 @@
                 <tr class="dataTableRow">
                     <td class="dataTableText">${rental.title}</td>
                     <td class="dataTableText">${rental.rating}</td>
-                    <td class="dataTableText"><form:checkbox path="movieRentals[${status.index}].selected"/></td>
+                    <td class="dataTableText"><form:checkbox onClick="updateCount();" path="movieRentals[${status.index}].selected"/></td>
                 </tr>
 
                 <form:hidden path="movieRentals[${status.index}].title" />
@@ -40,6 +50,10 @@
             <input type="submit"/>
 
             </form:form>
+
+            <div class="shoppingCartCount">
+            	<p>Cart: <span id="cartCount">${cart.itemCount}</span></p></div>
+            </div>
     </div>
 
 </body>

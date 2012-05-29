@@ -61,4 +61,13 @@ class RentalControllerTest {
         assert session.getAttribute("cart").rentals.contains(selectedRental)
     }
 
+    @Test
+    void count(){
+        def session = new MockHttpSession()
+        session.setAttribute("cart", new ShoppingCart())
+
+        finalizeSetUp()
+        assert rentalController.count(session) == 0
+    }
+
 }

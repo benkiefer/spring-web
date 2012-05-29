@@ -1,7 +1,6 @@
 package org.burgers.spring.web.mvc.example.movie.rental
 
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.SessionAttributes
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
 import org.burgers.spring.web.mvc.example.ShoppingCart
@@ -9,11 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.beans.factory.annotation.Autowired
 import org.burgers.spring.web.domain.Repository
 import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.RequestParam
 import javax.servlet.http.HttpSession
 import org.springframework.validation.BindingResult
-import org.springframework.ui.Model
-import org.burgers.spring.web.domain.Movie
+import org.springframework.web.bind.annotation.ResponseBody
 
 @Controller
 @RequestMapping("/rental")
@@ -39,6 +36,12 @@ class RentalController {
         }
 
         new ModelAndView("rental/confirm")
+    }
+
+    @RequestMapping(value = "/count.do", method = RequestMethod.GET)
+    @ResponseBody count(HttpSession session) {
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart")
+        cart.itemCount
     }
 
 }

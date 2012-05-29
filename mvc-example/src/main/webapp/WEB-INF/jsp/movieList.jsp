@@ -3,6 +3,7 @@
 <head>
     <title>Movie List</title>
 </head>
+
 <body>
     <div class="contentArea">
 	    <h1>Movie List</h1>
