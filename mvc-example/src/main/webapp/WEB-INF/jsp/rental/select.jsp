@@ -1,14 +1,18 @@
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <head>
     <title>Pick a Movie</title>
     <script type="text/javascript">
-        function updateCount() {
-            var url = "<c:url value="/rental/count.do"/>";
-            $.getJSON(url, function(data){
-              alert("Got back: " + data);
-              $('#cartCount').text(data);
-            });
+        function add(id) {
+                var url = "<c:url value="/rental/add.do"/>";
+                $.getJSON(url, {movieId: id}, function(data){
+                  $('#cartCount').text(data);
+                });
+        }
+        function remove(id) {
+                var url = "<c:url value="/rental/remove.do"/>";
+                $.getJSON(url, {movieId: id}, function(data){
+                  $('#cartCount').text(data);
+                });
         }
     </script>
 
@@ -19,13 +23,11 @@
     <div class="contentArea">
 	    <h1>Select a Movie</h1>
 
-            <form:form method="POST" commandName="movies" action="select.do">
-                <form:errors path="*" cssClass="errorblock" element="div" />
-
             <table class="dataTable">
                 <tr>
                     <td class="dataTableColumnHeading">Title:</td>
                     <td class="dataTableColumnHeading">Rating:</td>
+                    <td class="dataTableColumnHeading">&nbsp;</td>
                     <td class="dataTableColumnHeading">&nbsp;</td>
                 <tr>
 
@@ -35,21 +37,19 @@
                 <tr class="dataTableRow">
                     <td class="dataTableText">${rental.title}</td>
                     <td class="dataTableText">${rental.rating}</td>
-                    <td class="dataTableText"><form:checkbox onClick="updateCount();" path="movieRentals[${status.index}].selected"/></td>
+                    <td class="dataTableText"><input type="button" onClick="add(${rental.id});" value="add"/></td>
+                    <td class="dataTableText"><input type="button" onClick="remove(${rental.id});" value="remove"/></td>
                 </tr>
-
-                <form:hidden path="movieRentals[${status.index}].title" />
-                <form:hidden path="movieRentals[${status.index}].rating" />
-                <form:hidden path="movieRentals[${status.index}].id" />
 
                 </c:forEach>
 
             </table>
 
             <br/>
-            <input type="submit"/>
 
-            </form:form>
+            <a href="<c:url value="/rental/cart.do"/>">View Cart</a>
+
+            <br/>
 
             <div class="shoppingCartCount">
             	<p>Cart: <span id="cartCount">${cart.itemCount}</span></p></div>

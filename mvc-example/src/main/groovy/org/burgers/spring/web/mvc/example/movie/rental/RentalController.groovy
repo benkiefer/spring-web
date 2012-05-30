@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import javax.servlet.http.HttpSession
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.ResponseBody
+import javax.servlet.http.HttpServletRequest
 
 @Controller
 @RequestMapping("/rental")
@@ -25,22 +26,22 @@ class RentalController {
         new ModelAndView("rental/select", "movies", new Rentals(movieRentals: rentals))
     }
 
-    @RequestMapping(value = "/select.do", method = RequestMethod.POST)
-    ModelAndView onSubmit(@ModelAttribute("movies") Rentals movies, BindingResult result, HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart")
-
-        movies.movieRentals.each {
-            if (it.selected) {
-                cart.addItem(it)
-            }
-        }
-
-        new ModelAndView("rental/confirm")
+    @RequestMapping(value = "/cart.do", method = RequestMethod.GET)
+    String viewCart() {
+        "rental/confirm"
     }
 
-    @RequestMapping(value = "/count.do", method = RequestMethod.GET)
-    @ResponseBody count(HttpSession session) {
+    @RequestMapping(value = "/add.do", method = RequestMethod.GET)
+    @ResponseBody addMovie(HttpServletRequest request, HttpSession session) {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart")
+        cart.addItem(request.getParameter("movieId").toLong())
+        cart.itemCount
+    }
+
+    @RequestMapping(value = "/remove.do", method = RequestMethod.GET)
+    @ResponseBody removeMovie(HttpServletRequest request, HttpSession session) {
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart")
+        cart.removeItem(request.getParameter("movieId").toLong())
         cart.itemCount
     }
 

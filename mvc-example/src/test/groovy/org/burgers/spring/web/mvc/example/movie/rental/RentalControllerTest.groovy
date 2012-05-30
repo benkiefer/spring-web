@@ -9,17 +9,20 @@ import org.burgers.spring.web.domain.Movie
 
 import org.springframework.mock.web.MockHttpSession
 import org.springframework.validation.BindException
+import org.springframework.mock.web.MockHttpServletRequest
 
 class RentalControllerTest {
     RentalController rentalController
     private mockRepository
     private mockFactory
+    private mockCart
 
     @Before
     void setUp() {
         rentalController = new RentalController()
         mockRepository = new MockFor(Repository)
         mockFactory = new MockFor(MovieRentalFactory)
+        mockCart = new MockFor(ShoppingCart)
     }
 
     void finalizeSetUp(){
@@ -45,29 +48,43 @@ class RentalControllerTest {
     }
 
     @Test
-    void doSubmit() {
+    void addMovie(){
+        mockCart.demand.addItem(1){}
+        mockCart.demand.getItemCount(){1}
+
         def session = new MockHttpSession()
-        session.setAttribute("cart", new ShoppingCart())
+        session.setAttribute("cart", mockCart.proxyInstance())
 
-        def selectedRental = new MovieRental(selected: true)
-        def notSelectedRental = new MovieRental(selected: false)
+        def request = new MockHttpServletRequest()
+        request.addParameter("movieId", "1")
 
-        def rentals = new Rentals(movieRentals: [notSelectedRental, selectedRental])
 
         finalizeSetUp()
 
-        def result = rentalController.onSubmit(rentals, new BindException(rentals,"rentals"), session)
-        assert result.viewName == "rental/confirm"
-        assert session.getAttribute("cart").rentals.contains(selectedRental)
+        assert rentalController.addMovie(request, session) == 1
     }
 
     @Test
-    void count(){
+    void removeMovie(){
+        mockCart.demand.removeItem(1){}
+        mockCart.demand.getItemCount(){0}
+
         def session = new MockHttpSession()
-        session.setAttribute("cart", new ShoppingCart())
+        session.setAttribute("cart", mockCart.proxyInstance())
+
+        def request = new MockHttpServletRequest()
+        request.addParameter("movieId", "1")
+
 
         finalizeSetUp()
-        assert rentalController.count(session) == 0
+
+        assert rentalController.removeMovie(request, session) == 0
+    }
+
+    @Test
+    void viewCart(){
+        finalizeSetUp()
+        assert rentalController.viewCart() == "rental/confirm"
     }
 
 }

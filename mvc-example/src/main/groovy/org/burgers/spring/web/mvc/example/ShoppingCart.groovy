@@ -4,10 +4,14 @@ import org.burgers.spring.web.domain.Movie
 import org.burgers.spring.web.mvc.example.movie.rental.MovieRental
 
 class ShoppingCart implements Serializable {
-    List<MovieRental> rentals = []
+    Set<Long> rentals = [] as Set
 
-    void addItem(MovieRental rental) {
-        if (!rentals.find {it.id == rental.id}) rentals << rental
+    void addItem(Long movieId) {
+        rentals << movieId
+    }
+
+    void removeItem(Long id){
+        rentals.removeAll {it == id}
     }
 
     int getItemCount() {
