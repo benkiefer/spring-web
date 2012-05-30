@@ -80,6 +80,19 @@ class RentalControllerTest {
     }
 
     @Test
+    void clearCart() {
+        mockCart.demand.clear() {}
+        mockCart.demand.getItemCount() {0}
+
+        def session = new MockHttpSession()
+        session.setAttribute("cart", mockCart.proxyInstance())
+
+        finalizeSetUp()
+
+        assert rentalController.clearCart(session) == 0
+    }
+
+    @Test
     void viewCart() {
         finalizeSetUp()
         assert rentalController.viewCart() == "rental/confirm"

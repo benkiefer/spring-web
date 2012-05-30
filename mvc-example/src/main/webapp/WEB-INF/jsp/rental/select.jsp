@@ -4,15 +4,18 @@
     <script type="text/javascript">
         function add(id) {
                 var url = "<c:url value="/rental/add.do"/>";
-                $.getJSON(url, {movieId: id}, function(data){
-                  $('#cartCount').text(data);
-                });
+                updateCart(id, url);
         }
+
         function remove(id) {
                 var url = "<c:url value="/rental/remove.do"/>";
-                $.getJSON(url, {movieId: id}, function(data){
+                updateCart(id, url);
+        }
+
+        function updateCart(id, url){
+            $.getJSON(url, {movieId: id}, function(data){
                   $('#cartCount').text(data);
-                });
+            });
         }
     </script>
 

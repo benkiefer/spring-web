@@ -44,4 +44,11 @@ class RentalController {
         cart.itemCount
     }
 
+    @RequestMapping(value = "/clear.do", method = RequestMethod.GET)
+    @ResponseBody clearCart(HttpSession session) {
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart")
+        cart.clear()
+        cart.itemCount
+    }
+
 }
