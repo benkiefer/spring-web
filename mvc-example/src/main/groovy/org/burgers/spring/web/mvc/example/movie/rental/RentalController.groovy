@@ -1,17 +1,16 @@
 package org.burgers.spring.web.mvc.example.movie.rental
 
+import org.burgers.spring.web.domain.Repository
+import org.burgers.spring.web.mvc.example.ShoppingCart
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.servlet.ModelAndView
-import org.burgers.spring.web.mvc.example.ShoppingCart
 import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.beans.factory.annotation.Autowired
-import org.burgers.spring.web.domain.Repository
-import org.springframework.web.bind.annotation.ModelAttribute
-import javax.servlet.http.HttpSession
-import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.servlet.ModelAndView
+
 import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpSession
 
 @Controller
 @RequestMapping("/rental")

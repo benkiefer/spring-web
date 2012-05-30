@@ -1,8 +1,5 @@
 package org.burgers.spring.web.mvc.example
 
-import org.burgers.spring.web.domain.Movie
-import org.burgers.spring.web.mvc.example.movie.rental.MovieRental
-
 class ShoppingCart implements Serializable {
     Set<Long> rentals = [] as Set
 

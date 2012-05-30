@@ -1,14 +1,13 @@
 package org.burgers.spring.web.mvc.example.movie.rental
 
 import groovy.mock.interceptor.MockFor
-import org.burgers.spring.web.domain.Repository
-import org.junit.Test
 import org.burgers.spring.web.domain.Movie
-import org.springframework.web.servlet.ModelAndView
-import org.junit.Before
-
-import org.springframework.validation.BindingResult
 import org.burgers.spring.web.domain.Rating
+import org.burgers.spring.web.domain.Repository
+import org.junit.Before
+import org.junit.Test
+import org.springframework.validation.BindingResult
+import org.springframework.web.servlet.ModelAndView
 
 class MovieControllerTest {
     MovieController controller

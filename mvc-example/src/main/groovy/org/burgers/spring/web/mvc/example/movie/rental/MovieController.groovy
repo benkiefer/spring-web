@@ -1,15 +1,15 @@
 package org.burgers.spring.web.mvc.example.movie.rental
 
-import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.servlet.ModelAndView
-import org.springframework.beans.factory.annotation.Autowired
+import org.burgers.spring.web.domain.Movie
+import org.burgers.spring.web.domain.Rating
 import org.burgers.spring.web.domain.Repository
-import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Controller
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.ModelAttribute
-import org.burgers.spring.web.domain.Rating
-import org.burgers.spring.web.domain.Movie
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.servlet.ModelAndView
 
 @Controller
 class MovieController {

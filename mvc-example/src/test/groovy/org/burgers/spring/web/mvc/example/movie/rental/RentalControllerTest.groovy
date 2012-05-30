@@ -1,15 +1,13 @@
 package org.burgers.spring.web.mvc.example.movie.rental
 
-import org.junit.Test
-import org.junit.Before
-import org.burgers.spring.web.domain.Repository
 import groovy.mock.interceptor.MockFor
-import org.burgers.spring.web.mvc.example.ShoppingCart
 import org.burgers.spring.web.domain.Movie
-
-import org.springframework.mock.web.MockHttpSession
-import org.springframework.validation.BindException
+import org.burgers.spring.web.domain.Repository
+import org.burgers.spring.web.mvc.example.ShoppingCart
+import org.junit.Before
+import org.junit.Test
 import org.springframework.mock.web.MockHttpServletRequest
+import org.springframework.mock.web.MockHttpSession
 
 class RentalControllerTest {
     RentalController rentalController
@@ -25,7 +23,7 @@ class RentalControllerTest {
         mockCart = new MockFor(ShoppingCart)
     }
 
-    void finalizeSetUp(){
+    void finalizeSetUp() {
         rentalController.repository = mockRepository.proxyInstance()
         rentalController.factory = mockFactory.proxyInstance()
     }
@@ -36,8 +34,8 @@ class RentalControllerTest {
         def movies = [movie]
         def rental = new MovieRental()
 
-        mockFactory.demand.createFrom(movie){ rental }
-        mockRepository.demand.findAllMovies(){ movies }
+        mockFactory.demand.createFrom(movie) { rental }
+        mockRepository.demand.findAllMovies() { movies }
 
         finalizeSetUp()
         def session = new MockHttpSession()
@@ -48,9 +46,9 @@ class RentalControllerTest {
     }
 
     @Test
-    void addMovie(){
-        mockCart.demand.addItem(1){}
-        mockCart.demand.getItemCount(){1}
+    void addMovie() {
+        mockCart.demand.addItem(1) {}
+        mockCart.demand.getItemCount() {1}
 
         def session = new MockHttpSession()
         session.setAttribute("cart", mockCart.proxyInstance())
@@ -65,9 +63,9 @@ class RentalControllerTest {
     }
 
     @Test
-    void removeMovie(){
-        mockCart.demand.removeItem(1){}
-        mockCart.demand.getItemCount(){0}
+    void removeMovie() {
+        mockCart.demand.removeItem(1) {}
+        mockCart.demand.getItemCount() {0}
 
         def session = new MockHttpSession()
         session.setAttribute("cart", mockCart.proxyInstance())
@@ -82,7 +80,7 @@ class RentalControllerTest {
     }
 
     @Test
-    void viewCart(){
+    void viewCart() {
         finalizeSetUp()
         assert rentalController.viewCart() == "rental/confirm"
     }

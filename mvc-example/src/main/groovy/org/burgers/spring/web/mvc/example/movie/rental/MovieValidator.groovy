@@ -1,13 +1,12 @@
 package org.burgers.spring.web.mvc.example.movie.rental
 
-import org.springframework.validation.Validator
+import org.burgers.spring.web.domain.Movie
+import org.burgers.spring.web.domain.Repository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.validation.Errors
 import org.springframework.validation.ValidationUtils
-import org.springframework.beans.factory.annotation.Autowired
-import org.burgers.spring.web.domain.Repository
-import org.burgers.spring.web.domain.Rating
-import org.burgers.spring.web.domain.Movie
+import org.springframework.validation.Validator
 
 @Component
 class MovieValidator implements Validator {

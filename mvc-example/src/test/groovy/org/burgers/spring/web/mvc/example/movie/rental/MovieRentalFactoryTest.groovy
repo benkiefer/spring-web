@@ -1,9 +1,9 @@
 package org.burgers.spring.web.mvc.example.movie.rental
 
-import org.junit.Before
-import org.junit.Test
 import org.burgers.spring.web.domain.Movie
 import org.burgers.spring.web.domain.Rating
+import org.junit.Before
+import org.junit.Test
 
 class MovieRentalFactoryTest {
     MovieRentalFactory factory
