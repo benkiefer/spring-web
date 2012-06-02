@@ -5,11 +5,13 @@
         function add(id) {
                 var url = "<c:url value="/rental/add.do"/>";
                 updateCart(id, url);
+                stageForRemoval(id);
         }
 
         function remove(id) {
                 var url = "<c:url value="/rental/remove.do"/>";
                 updateCart(id, url);
+                stageForAddition(id);
         }
 
         function updateCart(id, url){
@@ -17,11 +19,31 @@
                   $('#cartCount').text(data);
             });
         }
+
+        function stageForRemoval(id){
+            $('#remove_' + id).show();
+            $('#add_' + id).hide();
+        }
+
+        function stageForAddition(id){
+            $('#add_' + id).show();
+            $('#remove_' + id).hide();
+        }
+
+        window.onload = function(){
+            <c:forEach var="rental" items="${movies.movieRentals}">
+                stageForAddition("${rental.id}");
+            </c:forEach>
+            <c:forEach var="id" items="${cart.rentals}">
+                stageForRemoval("${id}");
+            </c:forEach>
+        }
+
     </script>
 
 </head>
 
-<body>
+<body onload="updateButtons()">
 
     <div class="contentArea">
 	    <h1>Select a Movie</h1>
@@ -31,7 +53,6 @@
                     <td class="dataTableColumnHeading">Title:</td>
                     <td class="dataTableColumnHeading">Rating:</td>
                     <td class="dataTableColumnHeading">&nbsp;</td>
-                    <td class="dataTableColumnHeading">&nbsp;</td>
                 <tr>
 
 
@@ -40,8 +61,16 @@
                 <tr class="dataTableRow">
                     <td class="dataTableText">${rental.title}</td>
                     <td class="dataTableText">${rental.rating}</td>
-                    <td class="dataTableText"><input type="button" onClick="add(${rental.id});" value="add"/></td>
-                    <td class="dataTableText"><input type="button" onClick="remove(${rental.id});" value="remove"/></td>
+                    <td class="dataTableText">
+                        <input id="add_${rental.id}"
+                               type="button"
+                               onClick="add(${rental.id});"
+                               value="add"/>
+                        <input id="remove_${rental.id}"
+                               type="button"
+                               onClick="remove(${rental.id});"
+                               value="remove"/>
+                    </td>
                 </tr>
 
                 </c:forEach>

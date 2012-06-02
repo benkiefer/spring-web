@@ -60,8 +60,9 @@ class MovieControllerTest {
         finalizeSetUp()
 
         ModelAndView result = controller.onSubmit(movie, mockBindingResult.proxyInstance())
-        assert result.viewName == "success"
+        assert result.viewName == "addMovie"
         assert result.model.title == "Bob"
+        assert result.model.success
     }
 
     @Test

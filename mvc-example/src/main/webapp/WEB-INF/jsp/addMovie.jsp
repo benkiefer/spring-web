@@ -1,4 +1,5 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <head>
     <title>Add a Movie</title>
 </head>
@@ -27,6 +28,10 @@
             <br/>
             <input type="submit"/>
 	    </form:form>
+
+	    <c:if test="${success}">
+	        <p>Movie added: ${title}<p/>
+	    </c:if>
 
     </div>
 </body>

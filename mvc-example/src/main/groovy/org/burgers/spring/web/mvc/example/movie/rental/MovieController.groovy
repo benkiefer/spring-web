@@ -28,7 +28,7 @@ class MovieController {
             return new ModelAndView("addMovie", [command: movie, ratings: getRatings()])
         } else {
             repository.save(movie)
-            return new ModelAndView("success", [title: movie.title])
+            return new ModelAndView("addMovie", [success: true, title: movie.title])
         }
     }
 

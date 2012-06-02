@@ -20,14 +20,22 @@ class RentalController {
 
     @RequestMapping(value = "/select.do", method = RequestMethod.GET)
     ModelAndView selectMovie(HttpSession session) {
-        session.setAttribute("cart", new ShoppingCart())
+        if (!session.getAttribute("cart")){
+            session.setAttribute("cart", new ShoppingCart())
+        }
         def rentals = repository.findAllMovies().collect {factory.createFrom(it)}
         new ModelAndView("rental/select", "movies", new Rentals(movieRentals: rentals))
     }
 
     @RequestMapping(value = "/cart.do", method = RequestMethod.GET)
-    String viewCart() {
-        "rental/confirm"
+    ModelAndView viewCart(HttpSession session) {
+        ShoppingCart cart = session.getAttribute("cart")
+
+        def rentals = cart.rentals.collect {
+            factory.createFrom(repository.findById(it))
+        }
+
+        new ModelAndView("rental/confirm", [rentals: rentals])
     }
 
     @RequestMapping(value = "/add.do", method = RequestMethod.GET)
