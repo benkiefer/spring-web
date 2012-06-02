@@ -32,10 +32,14 @@
 
         window.onload = function(){
             <c:forEach var="rental" items="${movies.movieRentals}">
-                stageForAddition("${rental.id}");
-            </c:forEach>
-            <c:forEach var="id" items="${cart.rentals}">
-                stageForRemoval("${id}");
+                <c:choose>
+                    <c:when test="${!rental.selected}">
+                        stageForAddition("${rental.id}");
+                    </c:when>
+                    <c:otherwise>
+                        stageForRemoval("${rental.id}");
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         }
 

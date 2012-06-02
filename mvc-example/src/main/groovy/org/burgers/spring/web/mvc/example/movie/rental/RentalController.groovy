@@ -20,16 +20,22 @@ class RentalController {
 
     @RequestMapping(value = "/select.do", method = RequestMethod.GET)
     ModelAndView selectMovie(HttpSession session) {
-        if (!session.getAttribute("cart")){
-            session.setAttribute("cart", new ShoppingCart())
+        ShoppingCart cart = getCart(session)
+        if (!cart){
+            cart = new ShoppingCart()
+            session.setAttribute("cart", cart)
         }
-        def rentals = repository.findAllMovies().collect {factory.createFrom(it)}
+        def rentals = repository.findAllMovies().collect {
+            def hasItem = cart.rentals.contains(it.id)
+            factory.createFrom(it, hasItem)
+        }
+
         new ModelAndView("rental/select", "movies", new Rentals(movieRentals: rentals))
     }
 
     @RequestMapping(value = "/cart.do", method = RequestMethod.GET)
     ModelAndView viewCart(HttpSession session) {
-        ShoppingCart cart = session.getAttribute("cart")
+        ShoppingCart cart = getCart(session)
 
         def rentals = cart.rentals.collect {
             factory.createFrom(repository.findById(it))
@@ -40,23 +46,27 @@ class RentalController {
 
     @RequestMapping(value = "/add.do", method = RequestMethod.GET)
     @ResponseBody addMovie(HttpServletRequest request, HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart")
+        ShoppingCart cart = getCart(session)
         cart.addItem(request.getParameter("movieId").toLong())
         cart.itemCount
     }
 
     @RequestMapping(value = "/remove.do", method = RequestMethod.GET)
     @ResponseBody removeMovie(HttpServletRequest request, HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart")
+        ShoppingCart cart = getCart(session)
         cart.removeItem(request.getParameter("movieId").toLong())
         cart.itemCount
     }
 
     @RequestMapping(value = "/clear.do", method = RequestMethod.GET)
     @ResponseBody clearCart(HttpSession session) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart")
+        ShoppingCart cart = getCart(session)
         cart.clear()
         cart.itemCount
+    }
+
+    private ShoppingCart getCart(HttpSession session){
+        session.getAttribute("cart")
     }
 
 }

@@ -30,11 +30,15 @@ class RentalControllerTest {
 
     @Test
     void selectMovie() {
-        def movie = new Movie()
+        def movie = new Movie(id: 1)
         def movies = [movie]
         def rental = new MovieRental()
 
-        mockFactory.demand.createFrom(movie) { rental }
+        mockFactory.demand.createFrom() {arg1, arg2 ->
+            assert arg1 == movie
+            assert !arg2
+            rental
+        }
         mockRepository.demand.findAllMovies() { movies }
 
         finalizeSetUp()
@@ -46,17 +50,44 @@ class RentalControllerTest {
     }
 
     @Test
-    void selectMovie_existingCart() {
-        def movie = new Movie()
+    void selectMovie_existingCart_no_movies() {
+        def cart = new ShoppingCart()
+        def movie = new Movie(id: 1)
         def movies = [movie]
         def rental = new MovieRental()
 
-        mockFactory.demand.createFrom(movie) { rental }
+        mockFactory.demand.createFrom() {arg1, arg2 ->
+            assert arg1 == movie
+            assert !arg2
+            rental
+        }
         mockRepository.demand.findAllMovies() { movies }
 
         finalizeSetUp()
         def session = new MockHttpSession()
-        def cart = new ShoppingCart()
+        session.setAttribute("cart", cart)
+        def result = rentalController.selectMovie(session)
+        assert result.viewName == "rental/select"
+        assert result.model.movies.movieRentals.contains(rental)
+        assert session.getAttribute("cart") == cart
+    }
+
+    @Test
+    void selectMovie_existingCart_with_movies() {
+        def movie = new Movie(id: 1)
+        def movies = [movie]
+        def rental = new MovieRental()
+
+        mockRepository.demand.findAllMovies() { movies }
+        mockFactory.demand.createFrom() {arg1, arg2 ->
+            assert arg1 == movie
+            assert arg2
+            rental
+        }
+
+        finalizeSetUp()
+        def session = new MockHttpSession()
+        def cart = new ShoppingCart(rentals: [1L])
         session.setAttribute("cart", cart)
         def result = rentalController.selectMovie(session)
         assert result.viewName == "rental/select"
@@ -134,11 +165,6 @@ class RentalControllerTest {
 
     @Test
     void viewCart_nothing_in_cart() {
-        def rental1 = new MovieRental()
-        def rental2 = new MovieRental()
-        def movie1 = new Movie()
-        def movie2 = new Movie()
-
         mockCart.demand.getRentals(){[]}
         def session = new MockHttpSession()
         session.setAttribute("cart", mockCart.proxyInstance())
