@@ -10,6 +10,7 @@
         <module>mvc-example</module>
         <module>parent</module>
         <module>domain</module>
+        <module>integration</module>
     </modules>
     <name>Web Flow Sample Maven Webapp</name>
     <url>http://maven.apache.org</url>
