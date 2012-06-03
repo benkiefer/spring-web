@@ -115,8 +115,8 @@
                 <configuration>
                     <driver>org.h2.Driver</driver>
                     <url>${env.DB_URL}</url>
-                    <username>sa</username>
-                    <password></password>
+                    <username>${env.DB_USERNAME}</username>
+                    <password>${env.DB_PASSWORD}</password>
                 </configuration>
 
                 <executions>

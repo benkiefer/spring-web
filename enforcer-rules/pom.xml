@@ -33,7 +33,11 @@
                             <rules>
                                 <environmentVariableRule
                                         implementation="org.burgers.maven.support.enforcer.rules.EnvironmentVariableExistsRule">
-                                    <environmentVariable>DB_URL</environmentVariable>
+                                    <environmentVariables>
+                                        <environmentVariable>DB_URL</environmentVariable>
+                                        <environmentVariable>DB_USERNAME</environmentVariable>
+                                        <environmentVariable>DB_PASSWORD</environmentVariable>
+                                    </environmentVariables>
                                 </environmentVariableRule>
                             </rules>
                         </configuration>
