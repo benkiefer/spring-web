@@ -21,7 +21,7 @@
             <p class="headerText">White Box Rentals</p>
 
         <ul id="list-nav">
-            <li><a href="<c:url value="/options.do"/>">Home</a></li>
+            <li><a id="Home" href="<c:url value="/options.do"/>">Home</a></li>
             <li><a href="#">TBD...</a></li>
         </ul>
 
