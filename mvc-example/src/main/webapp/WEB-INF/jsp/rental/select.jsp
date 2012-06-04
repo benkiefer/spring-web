@@ -52,7 +52,7 @@
     <div class="contentArea">
 	    <h1>Select a Movie</h1>
 
-            <table class="dataTable">
+            <table id="movies" class="dataTable">
                 <tr>
                     <td class="dataTableColumnHeading">Title:</td>
                     <td class="dataTableColumnHeading">Rating:</td>
@@ -83,7 +83,7 @@
 
             <br/>
 
-            <a href="<c:url value="/rental/cart.do"/>">View Cart</a>
+            <a id="viewCart" href="<c:url value="/rental/cart.do"/>">View Cart</a>
 
             <br/>
 

@@ -66,6 +66,15 @@ class RepositoryImplTest {
         assert repository.findById(allMovies[1].id).title == bob.title
     }
 
+    @Test
+    void findByName() {
+        def sam = new Movie(title: "sam", rating: Rating.G)
+        repository.save(sam)
+
+        def allMovies = repository.findAllMovies().sort{it.id}
+        assert repository.findByTitle("sam").rating == sam.rating
+    }
+
     @After
     void tearDown() {
         repository.deleteAll()
