@@ -13,12 +13,12 @@
 		    <table>
                 <tr>
                     <td><form:label path="title">Title:</form:label></td>
-                    <td><form:input path="title"/></td>
+                    <td><form:input id="title" path="title"/></td>
                 </tr>
                 <tr>
                     <td><form:label path="rating">Rating:</form:label></td>
                     <td>
-                        <form:select path="rating">
+                        <form:select id="rating" path="rating">
                             <form:option value="NONE" label="--- Select ---"/>
                             <form:options items="${ratings}"/>
                         </form:select>
@@ -26,7 +26,7 @@
                 </tr>
             </table>
             <br/>
-            <input type="submit"/>
+            <input id="submit" type="submit"/>
 	    </form:form>
 
 	    <c:if test="${success}">
