@@ -14,7 +14,7 @@
         <c:when test="${fn:length(cart.rentals) gt 0}">
             <p>You are renting ${cart.itemCount} item(s).</p>
 
-                <table class="dataTable">
+                <table id="movies" class="dataTable">
                     <tr>
                         <td class="dataTableColumnHeading">Title:</td>
                         <td class="dataTableColumnHeading">Rating:</td>
