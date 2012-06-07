@@ -25,4 +25,6 @@ class Movie {
     @Enumerated(EnumType.STRING)
     Rating rating
 
+    @Column(name = "Image")
+    byte[] image
 }

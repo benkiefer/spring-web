@@ -10,6 +10,7 @@ import org.junit.After
 @RunWith(SpringJUnit4ClassRunner)
 @ContextConfiguration(locations = ["classpath:contexts/DatabaseContext.xml"])
 class RepositoryImplTest {
+    public static final byte[] BYTES = [1, 2, 3] as byte[]
 
     @Autowired
     Repository repository
@@ -20,8 +21,8 @@ class RepositoryImplTest {
 
     @Test
     void findAllMovieTitles(){
-        def one = new Movie(title: "bob1", rating: Rating.G)
-        def two = new Movie(title: "bob2", rating: Rating.G)
+        def one = new Movie(title: "bob1", rating: Rating.G, image: BYTES)
+        def two = new Movie(title: "bob2", rating: Rating.G, image: BYTES)
         repository.save(one)
         repository.save(two)
         def results = repository.findAllMovieTitles()
@@ -31,7 +32,7 @@ class RepositoryImplTest {
 
     @Test
     void save_delete() {
-        def mine = new Movie(title: "bob", rating: Rating.G)
+        def mine = new Movie(title: "bob", rating: Rating.G, image: BYTES)
         repository.save(mine)
         def results = repository.findAllMovies()
         assert results.size() == 1
@@ -42,8 +43,8 @@ class RepositoryImplTest {
 
     @Test
     void findAll_deleteAll() {
-        def bob = new Movie(title: "bob", rating: Rating.G)
-        def larry = new Movie(title: "larry", rating: Rating.G)
+        def bob = new Movie(title: "bob", rating: Rating.G, image: BYTES)
+        def larry = new Movie(title: "larry", rating: Rating.G, image: BYTES)
         repository.save(bob)
         repository.save(larry)
         def results = repository.findAllMovies()
@@ -56,8 +57,8 @@ class RepositoryImplTest {
 
     @Test
     void findById() {
-        def sam = new Movie(title: "sam", rating: Rating.G)
-        def bob = new Movie(title: "bob", rating: Rating.G)
+        def sam = new Movie(title: "sam", rating: Rating.G, image: BYTES)
+        def bob = new Movie(title: "bob", rating: Rating.G, image: BYTES)
         repository.save(sam)
         repository.save(bob)
 
@@ -68,7 +69,7 @@ class RepositoryImplTest {
 
     @Test
     void findByName() {
-        def sam = new Movie(title: "sam", rating: Rating.G)
+        def sam = new Movie(title: "sam", rating: Rating.G, image: BYTES)
         repository.save(sam)
 
         def allMovies = repository.findAllMovies().sort{it.id}

@@ -20,6 +20,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable
 @RunWith(SpringJUnit4ClassRunner)
 @ContextConfiguration(locations=["classpath*:/contexts/DatabaseContext.xml"])
 class ListMoviesTest {
+    public static final BYTES = [1,2,3] as byte[]
     @Autowired Repository repository
 
     WebClient webClient
@@ -32,8 +33,8 @@ class ListMoviesTest {
 
     @Test
     void happyPath(){
-        repository.save(new Movie(title: "Jaws", rating: Rating.G))
-        repository.save(new Movie(title: "Sesame Street", rating: Rating.R))
+        repository.save(new Movie(title: "Jaws", rating: Rating.G, image: BYTES))
+        repository.save(new Movie(title: "Sesame Street", rating: Rating.R, image: BYTES))
 
         HtmlPage page = webClient.getPage(HOME_URL + "list.do")
         assert page.titleText == "Movie List"

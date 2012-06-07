@@ -8,7 +8,7 @@
 
         <h1>Add a Movie</h1>
 
-        <form:form method="POST" action="add.do">
+        <form:form method="POST" action="add.do" encType="multipart/form-data">
 		    <form:errors path="*" cssClass="errorblock" element="div" />
 		    <table>
                 <tr>
@@ -22,6 +22,12 @@
                             <form:option value="NONE" label="--- Select ---"/>
                             <form:options items="${ratings}"/>
                         </form:select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><form:label path="image">Image:</form:label></td>
+                    <td>
+                        <form:input id="image" path="image" type="file"/>
                     </td>
                 </tr>
             </table>

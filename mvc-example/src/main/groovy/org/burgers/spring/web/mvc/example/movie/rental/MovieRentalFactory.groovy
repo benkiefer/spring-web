@@ -4,7 +4,7 @@ import org.burgers.spring.web.domain.Movie
 import org.springframework.stereotype.Component
 
 @Component
-class MovieRentalFactory {
+class   MovieRentalFactory {
     MovieRental createFrom(Movie movie){
         createFrom(movie, false)
     }

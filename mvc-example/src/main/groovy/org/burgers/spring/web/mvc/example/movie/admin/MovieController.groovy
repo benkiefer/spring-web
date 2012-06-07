@@ -1,6 +1,5 @@
-package org.burgers.spring.web.mvc.example.movie.rental
+package org.burgers.spring.web.mvc.example.movie.admin
 
-import org.burgers.spring.web.domain.Movie
 import org.burgers.spring.web.domain.Rating
 import org.burgers.spring.web.domain.Repository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView
 class MovieController {
     @Autowired Repository repository
     @Autowired MovieValidator validator
+    @Autowired MovieFactory movieFactory
 
     @RequestMapping("/list.do")
     ModelAndView listMovies() {
@@ -22,19 +22,19 @@ class MovieController {
     }
 
     @RequestMapping(value = "/add.do", method = RequestMethod.POST)
-    ModelAndView onSubmit(@ModelAttribute("command") Movie movie, BindingResult result) {
+    ModelAndView onSubmit(@ModelAttribute("command") NewMovie movie, BindingResult result) {
         validator.validate(movie, result)
         if (result.hasErrors()) {
             return new ModelAndView("addMovie", [command: movie, ratings: getRatings()])
         } else {
-            repository.save(movie)
+            repository.save(movieFactory.createFrom(movie))
             return new ModelAndView("addMovie", [success: true, title: movie.title])
         }
     }
 
     @RequestMapping(value = "/add.do", method = RequestMethod.GET)
     ModelAndView add() {
-        new ModelAndView("addMovie", [command: new Movie(), ratings: getRatings()])
+        new ModelAndView("addMovie", [command: new NewMovie(), ratings: getRatings()])
     }
 
     @RequestMapping("/options.do")

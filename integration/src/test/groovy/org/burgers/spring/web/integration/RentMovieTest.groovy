@@ -22,8 +22,9 @@ import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController
 @RunWith(SpringJUnit4ClassRunner)
 @ContextConfiguration(locations = ["classpath*:/contexts/DatabaseContext.xml"])
 class RentMovieTest {
-    final String RENT_MOVIE_TITLE = "Pick a Movie"
-    final String VIEW_CART_TITLE = "Review Your Cart"
+    public static final byte[] BYTES = [1,2,3] as byte[]
+    public static final String RENT_MOVIE_TITLE = "Pick a Movie"
+    public static final String VIEW_CART_TITLE = "Review Your Cart"
 
     @Autowired Repository repository
 
@@ -38,8 +39,8 @@ class RentMovieTest {
 
     @Test
     void happyPath() {
-        repository.save(new Movie(title: "Jaws", rating: Rating.G))
-        repository.save(new Movie(title: "Sesame Street", rating: Rating.R))
+        repository.save(new Movie(title: "Jaws", rating: Rating.G, image: BYTES))
+        repository.save(new Movie(title: "Sesame Street", rating: Rating.R, image: BYTES))
 
         HtmlPage page = webClient.getPage(RENTAL_START_URL)
         assert page.titleText == RENT_MOVIE_TITLE
@@ -65,8 +66,8 @@ class RentMovieTest {
 
     @Test
     void happyPath_cart_with_multple_items() {
-        repository.save(new Movie(title: "Jaws", rating: Rating.G))
-        repository.save(new Movie(title: "Sesame Street", rating: Rating.R))
+        repository.save(new Movie(title: "Jaws", rating: Rating.G, image: BYTES))
+        repository.save(new Movie(title: "Sesame Street", rating: Rating.R, image: BYTES))
 
         HtmlPage page = webClient.getPage(RENTAL_START_URL)
         assert page.titleText == RENT_MOVIE_TITLE

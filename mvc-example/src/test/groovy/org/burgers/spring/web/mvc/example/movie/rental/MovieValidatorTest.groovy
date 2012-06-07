@@ -7,12 +7,16 @@ import org.burgers.spring.web.domain.Repository
 import org.junit.Before
 import org.junit.Test
 import org.springframework.validation.BindException
+import org.burgers.spring.web.mvc.example.movie.admin.MovieValidator
+import org.burgers.spring.web.mvc.example.movie.admin.NewMovie
+import org.springframework.web.multipart.MultipartFile
 
 class MovieValidatorTest {
     MovieValidator validator
     private mockRepository
-    Movie movie
+    NewMovie movie
     BindException exception
+    private mockImage
 
     @Before
     void setUp() {
@@ -20,6 +24,7 @@ class MovieValidatorTest {
         mockRepository = new MockFor(Repository)
         movie = createValidMovie()
         exception = new BindException(movie, "movie")
+        mockImage = new MockFor(MultipartFile)
     }
 
     void finalizeSetUp(){
@@ -29,12 +34,14 @@ class MovieValidatorTest {
     @Test
     void supports() {
         finalizeSetUp()
-        assert validator.supports(Movie)
+        assert validator.supports(NewMovie)
         assert !validator.supports(String)
     }
 
     @Test
     void validate_title() {
+        mockImage.demand.isEmpty(){false}
+        movie.image = mockImage.proxyInstance()
         mockRepository.demand.findAllMovieTitles(){[]}
         finalizeSetUp()
         validator.validate movie, exception
@@ -43,6 +50,8 @@ class MovieValidatorTest {
 
     @Test
     void validate_title_null_from_repository() {
+        mockImage.demand.isEmpty(){false}
+        movie.image = mockImage.proxyInstance()
         mockRepository.demand.findAllMovieTitles(){null}
         finalizeSetUp()
         validator.validate movie, exception
@@ -51,6 +60,8 @@ class MovieValidatorTest {
 
     @Test
     void validate_invalid_title_duplicate() {
+        mockImage.demand.isEmpty(){false}
+        movie.image = mockImage.proxyInstance()
         mockRepository.demand.findAllMovieTitles(){[movie.title]}
 
         finalizeSetUp()
@@ -63,6 +74,8 @@ class MovieValidatorTest {
 
     @Test
     void validate_invalid_title_empty() {
+        mockImage.demand.isEmpty(){false}
+        movie.image = mockImage.proxyInstance()
         mockRepository.demand.findAllMovieTitles(){[]}
         finalizeSetUp()
         movie.title = ""
@@ -74,6 +87,8 @@ class MovieValidatorTest {
 
     @Test
     void validate_null_title() {
+        mockImage.demand.isEmpty(){false}
+        movie.image = mockImage.proxyInstance()
         mockRepository.demand.findAllMovieTitles(){[]}
         finalizeSetUp()
 
@@ -82,6 +97,19 @@ class MovieValidatorTest {
 
         verifyErrorCount 1
         verifyErrorForField "title", "required.title"
+    }
+
+    @Test
+    void validate_null_file() {
+        mockImage.demand.isEmpty(){true}
+        movie.image = mockImage.proxyInstance()
+        mockRepository.demand.findAllMovieTitles(){[]}
+        finalizeSetUp()
+
+        validator.validate(movie, exception)
+
+        verifyErrorCount 1
+        verifyErrorForField "image", "required.image"
     }
 
     private verifyErrorCount(int count){
@@ -104,7 +132,7 @@ class MovieValidatorTest {
         assert error.defaultMessage == message
     }
 
-    private Movie createValidMovie(){
-        new Movie(title: "Jaws", rating: Rating.G)
+    private NewMovie createValidMovie(){
+        new NewMovie(title: "Jaws", rating: Rating.G)
     }
 }

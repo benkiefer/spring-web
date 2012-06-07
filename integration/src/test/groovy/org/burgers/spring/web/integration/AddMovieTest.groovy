@@ -16,6 +16,8 @@ import static org.burgers.spring.web.integration.util.IntegrationUtils.cleanData
 import com.gargoylesoftware.htmlunit.html.HtmlSelect
 import com.gargoylesoftware.htmlunit.html.HtmlInput
 import org.burgers.spring.web.domain.Rating
+import com.gargoylesoftware.htmlunit.html.HtmlFileInput
+import org.burgers.spring.web.integration.util.FileUtil
 
 @RunWith(SpringJUnit4ClassRunner)
 @ContextConfiguration(locations=["classpath*:/contexts/DatabaseContext.xml"])
@@ -40,6 +42,9 @@ class AddMovieTest {
 
         HtmlSelect select = (HtmlSelect) page.getElementById("rating")
         select.setSelectedAttribute(select.getOptionByText("G"), true)
+
+        HtmlFileInput fileInput = (HtmlFileInput) page.getElementById("image")
+        fileInput.setValueAttribute(new FileUtil().findFileInClasspath("Thor.jpg").absolutePath)
 
         page = page.getElementById("submit").click()
 

@@ -1,4 +1,4 @@
-package org.burgers.spring.web.mvc.example.movie.rental
+package org.burgers.spring.web.mvc.example.movie.admin
 
 import org.burgers.spring.web.domain.Movie
 import org.burgers.spring.web.domain.Repository
@@ -15,13 +15,17 @@ class MovieValidator implements Validator {
     Repository repository
 
     boolean supports(Class<?> aClass) {
-        return Movie.isAssignableFrom(aClass);
+        return NewMovie.isAssignableFrom(aClass);
     }
 
     void validate(Object target, Errors errors) {
-        Movie movie = (Movie) target
+        NewMovie movie = (NewMovie) target
         if (repository.findAllMovieTitles()?.contains(movie.title)){
                     errors.rejectValue("title", "unique.title", "Movie: $movie.title already exists.")
+        }
+
+        if (movie.image.isEmpty()){
+            errors.rejectValue("image", "required.image")
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "required.title")
