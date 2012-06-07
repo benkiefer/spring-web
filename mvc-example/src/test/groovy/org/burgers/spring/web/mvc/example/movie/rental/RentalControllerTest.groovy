@@ -8,6 +8,8 @@ import org.junit.Before
 import org.junit.Test
 import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpSession
+import javax.servlet.http.HttpServletResponse
+import org.springframework.mock.web.MockHttpServletResponse
 
 class RentalControllerTest {
     RentalController rentalController
@@ -26,6 +28,15 @@ class RentalControllerTest {
     void finalizeSetUp() {
         rentalController.repository = mockRepository.proxyInstance()
         rentalController.factory = mockFactory.proxyInstance()
+    }
+
+    @Test
+    void image(){
+        def response = new MockHttpServletResponse()
+        mockRepository.demand.findById(1){new Movie(image: [1,2,3] as byte[])}
+        finalizeSetUp()
+        rentalController.image(response, 1)
+        assert response.contentType == "image/jpeg"
     }
 
     @Test

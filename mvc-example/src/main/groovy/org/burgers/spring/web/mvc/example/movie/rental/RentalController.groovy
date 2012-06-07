@@ -11,12 +11,34 @@ import org.springframework.web.servlet.ModelAndView
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
+import javax.servlet.http.HttpServletResponse
+import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 @RequestMapping("/rental")
 class RentalController {
     @Autowired Repository repository
     @Autowired MovieRentalFactory factory
+
+    @RequestMapping(value = "/image.do", method = RequestMethod.GET)
+    void image(HttpServletResponse response, @RequestParam(value="id") Integer id) {
+        response.contentType = "image/jpeg"
+
+        def inputStream = new ByteArrayInputStream(repository.findById(id).image)
+
+        def outputStream = response.getOutputStream()
+
+        int b = inputStream.read()
+        try{
+            while (b != -1){
+                outputStream.write(b)
+                b = inputStream.read()
+            }
+        } finally {
+            outputStream.flush()
+            outputStream.close()
+        }
+    }
 
     @RequestMapping(value = "/select.do", method = RequestMethod.GET)
     ModelAndView selectMovie(HttpSession session) {

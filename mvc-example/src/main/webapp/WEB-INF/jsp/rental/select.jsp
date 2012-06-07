@@ -57,6 +57,7 @@
                     <td class="dataTableColumnHeading">Title:</td>
                     <td class="dataTableColumnHeading">Rating:</td>
                     <td class="dataTableColumnHeading">&nbsp;</td>
+                    <td class="dataTableColumnHeading">&nbsp;</td>
                 <tr>
 
 
@@ -74,6 +75,9 @@
                                type="button"
                                onClick="remove(${rental.id});"
                                value="remove"/>
+                    </td>
+                    <td>
+                    <img src="<c:url value="/rental/image.do?id=${rental.id}"/>" border="0">
                     </td>
                 </tr>
 

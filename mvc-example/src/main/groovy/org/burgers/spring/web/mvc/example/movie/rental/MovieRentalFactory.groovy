@@ -10,6 +10,9 @@ class   MovieRentalFactory {
     }
 
     MovieRental createFrom(Movie movie, boolean selected){
-        new MovieRental(id: movie.id, title: movie.title, rating: movie.rating, selected: selected)
+        new MovieRental(id: movie.id,
+                title: movie.title,
+                rating: movie.rating,
+                selected: selected)
     }
 }
