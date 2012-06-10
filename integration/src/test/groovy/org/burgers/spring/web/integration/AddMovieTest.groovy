@@ -38,10 +38,10 @@ class AddMovieTest {
         assert page.titleText == "Add a Movie"
 
         HtmlInput input = (HtmlInput) page.getElementById("title")
-        input.setValueAttribute("Jaws")
+        input.setValueAttribute("Thor")
 
         HtmlSelect select = (HtmlSelect) page.getElementById("rating")
-        select.setSelectedAttribute(select.getOptionByText("G"), true)
+        select.setSelectedAttribute(select.getOptionByText("PG13"), true)
 
         HtmlFileInput fileInput = (HtmlFileInput) page.getElementById("image")
         fileInput.setValueAttribute(new FileUtil().findFileInClasspath("Thor.jpg").absolutePath)
@@ -52,12 +52,12 @@ class AddMovieTest {
 
         assert results.size() == 1
 
-        assert results[0].title == "Jaws"
-        assert results[0].rating == Rating.G
+        assert results[0].title == "Thor"
+        assert results[0].rating == Rating.PG13
 
         assert page.titleText == "Add a Movie"
 
-        assert page.body.textContent.contains("Movie added: Jaws")
+        assert page.body.textContent.contains("Movie added: Thor")
     }
 
     @Test

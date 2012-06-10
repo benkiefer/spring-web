@@ -84,18 +84,10 @@ class RentMovieTest {
         assertRentalInRow table, "Jaws", "G", 2
     }
 
-    private assertMovieInRow(HtmlTable table, String title, String rating, boolean checked, int rowNumber){
-       def row = table.getRow(rowNumber)
-       assert row.cells[0].textContent == title
-       assert row.cells[1].textContent == rating
-       HtmlInput input = (HtmlInput) row.cells[2].childElements.iterator().toList()[0]
-       assert input.checked == checked
-    }
-
     private assertRentalInRow(HtmlTable table, String title, String rating, int rowNumber){
        def row = table.getRow(rowNumber)
-       assert row.cells[0].textContent == title
-       assert row.cells[1].textContent == rating
+       assert row.cells[1].textContent == title
+       assert row.cells[2].textContent == rating
     }
 
     private assertCartCount(HtmlPage page, int count) {

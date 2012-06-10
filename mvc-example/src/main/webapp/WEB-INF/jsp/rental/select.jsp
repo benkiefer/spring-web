@@ -67,7 +67,7 @@
                     <ul class="movieRentalList">
                         <c:forEach var="rental" items="${group}">
                             <li class="movieRentalOption">
-                                <input id="movie_${rental.id}" type="image" onClick="update(${rental.id});"
+                                <input class="movieRentalOptionImage" id="movie_${rental.id}" type="image" onClick="update(${rental.id});"
                                 src="<c:url value="/rental/image.do?id=${rental.id}"/>"/>
                             </li>
                         </c:forEach>

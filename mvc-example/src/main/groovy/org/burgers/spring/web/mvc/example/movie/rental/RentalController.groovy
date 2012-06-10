@@ -52,7 +52,7 @@ class RentalController {
             factory.createFrom(it, hasItem)
         }
 
-        def rentalGroups = rentals.collate(3)
+        def rentalGroups = rentals.collate(4)
 
         new ModelAndView("rental/select", "movies", rentalGroups)
     }

@@ -65,6 +65,18 @@ p {
     border: 10px red solid;
 }
 
+.centered {
+}
+
+
+.confirmImage {
+    width: 25%;
+}
+
+.movieRentalOptionImage{
+    width: 20%;
+}
+
 .contentArea ul li {
     list-style: disc;
 }
@@ -103,13 +115,60 @@ table {
     background-color: #FFFFFF;
 }
 
+.confirmationTable {
+    border-collapse: collapse;
+    background-color: #FFFFFF;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.confirmationTableColumnHeading {
+    font-weight: bold;
+    background-color: #999999;
+    color: #000000;
+    text-align: left;
+}
+
 .dataTableColumnHeading {
     font-weight: bold;
     background-color: #999999;
     color: #000000;
     text-align: left;
-    border-top: solid 1px #000000;
+    border-bottom: solid 1px #000000;
 }
+
+.confirmationTableRow {
+    border-collapse: collapse;
+    text-align: left;
+    vertical-align: center;
+    font-size: 11px;
+}
+
+.confirmationTableImageColumn{
+    width: 20%;
+    text-align: center;
+}
+
+.confirmationTableTitleColumn{
+    text-align: left;
+    width: 40%;
+}
+
+.confirmationTableRatingColumn{
+    text-align: left;
+    width: 30%;
+}
+
+.confirmationTableCheckboxColumn{
+    text-align: center;
+    width: 10%;
+}
+
+.confirmationTableEven{
+    background-color: #E0E0E0;
+}
+
 
 .dataTableRow {
     border-collapse: collapse;
@@ -125,7 +184,17 @@ table {
     border-bottom: 1px solid #000000;
 }
 
+.confirmationTable tr td {
+    border-collapse: collapse;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
 .dataTable td {
+    padding: 5px;
+}
+
+.confirmationTable td {
     padding: 5px;
 }
 
@@ -134,9 +203,9 @@ table {
     color: #000000;
 }
 
-.dataTableButtonRow {
-    padding: 0 0 15px 10px;
-    text-align: left;
+.confirmationTableText {
+    font-size: 12px;
+    color: #000000;
 }
 
 /* #### top nav #### */
