@@ -52,7 +52,9 @@ class RentalController {
             factory.createFrom(it, hasItem)
         }
 
-        new ModelAndView("rental/select", "movies", new Rentals(movieRentals: rentals))
+        def rentalGroups = rentals.collate(3)
+
+        new ModelAndView("rental/select", "movies", rentalGroups)
     }
 
     @RequestMapping(value = "/cart.do", method = RequestMethod.GET)

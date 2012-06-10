@@ -45,9 +45,24 @@ p {
     padding: 10px;
 }
 
-.contentArea ul {
-    vertical-align: top;
-    padding: 5px 0 5px 35px;
+.movieRentalList {
+    text-align: center;
+    text-indent: -3.5em;
+    list-style-type: none;
+}
+
+.movieRentalOption {
+    display: inline;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.unselected {
+    border: 10px white solid;
+}
+
+.selected {
+    border: 10px red solid;
 }
 
 .contentArea ul li {

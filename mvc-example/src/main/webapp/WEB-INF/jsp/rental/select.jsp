@@ -2,6 +2,15 @@
 <head>
     <title>Pick a Movie</title>
     <script type="text/javascript">
+        function update(id) {
+            var selected = $('#movie_' + id).hasClass("selected");
+            if (selected){
+               remove(id);
+            } else{
+               add(id);
+            }
+        }
+
         function add(id) {
                 var url = "<c:url value="/rental/add.do"/>";
                 updateCart(id, url);
@@ -21,25 +30,27 @@
         }
 
         function stageForRemoval(id){
-            $('#remove_' + id).show();
-            $('#add_' + id).hide();
+            $('#movie_' + id).addClass("selected");
+            $('#movie_' + id).removeClass("unselected");
         }
 
         function stageForAddition(id){
-            $('#add_' + id).show();
-            $('#remove_' + id).hide();
+            $('#movie_' + id).removeClass("selected");
+            $('#movie_' + id).addClass("unselected");
         }
 
         window.onload = function(){
-            <c:forEach var="rental" items="${movies.movieRentals}">
-                <c:choose>
-                    <c:when test="${!rental.selected}">
-                        stageForAddition("${rental.id}");
-                    </c:when>
-                    <c:otherwise>
-                        stageForRemoval("${rental.id}");
-                    </c:otherwise>
-                </c:choose>
+            <c:forEach var="group" items="${movies}">
+                <c:forEach var="rental" items="${group}">
+                    <c:choose>
+                        <c:when test="${!rental.selected}">
+                            stageForAddition("${rental.id}");
+                        </c:when>
+                        <c:otherwise>
+                            stageForRemoval("${rental.id}");
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
             </c:forEach>
         }
 
@@ -50,40 +61,19 @@
 <body onload="updateButtons()">
 
     <div class="contentArea">
-	    <h1>Select a Movie</h1>
+               <p>Want a movie? Click it. Changed your mind? Click it again.</p>
 
-            <table id="movies" class="dataTable">
-                <tr>
-                    <td class="dataTableColumnHeading">Title:</td>
-                    <td class="dataTableColumnHeading">Rating:</td>
-                    <td class="dataTableColumnHeading">&nbsp;</td>
-                    <td class="dataTableColumnHeading">&nbsp;</td>
-                <tr>
-
-
-                <c:forEach var="rental" items="${movies.movieRentals}" varStatus="status">
-
-                <tr class="dataTableRow">
-                    <td class="dataTableText">${rental.title}</td>
-                    <td class="dataTableText">${rental.rating}</td>
-                    <td class="dataTableText">
-                        <input id="add_${rental.id}"
-                               type="button"
-                               onClick="add(${rental.id});"
-                               value="add"/>
-                        <input id="remove_${rental.id}"
-                               type="button"
-                               onClick="remove(${rental.id});"
-                               value="remove"/>
-                    </td>
-                    <td>
-                    <img src="<c:url value="/rental/image.do?id=${rental.id}"/>" border="0">
-                    </td>
-                </tr>
-
+                <c:forEach var="group" items="${movies}">
+                    <ul class="movieRentalList">
+                        <c:forEach var="rental" items="${group}">
+                            <li class="movieRentalOption">
+                                <input id="movie_${rental.id}" type="image" onClick="update(${rental.id});"
+                                src="<c:url value="/rental/image.do?id=${rental.id}"/>"/>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                    <br/>
                 </c:forEach>
-
-            </table>
 
             <br/>
 

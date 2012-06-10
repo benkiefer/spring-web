@@ -45,17 +45,14 @@ class RentMovieTest {
         HtmlPage page = webClient.getPage(RENTAL_START_URL)
         assert page.titleText == RENT_MOVIE_TITLE
 
-        HtmlTable table = (HtmlTable) page.getElementById("movies")
-
-        assertMovieInRow table, "Jaws", "G", false, 2
-        assertMovieInRow table, "Sesame Street", "R", false, 3
         assertCartCount page, 0
 
-        page = page.getElementById("add_${repository.findByTitle("Jaws").id}").click()
+        final movieId = repository.findByTitle("Jaws").id
+        page = page.getElementById("movie_${movieId}").click()
         assert page.titleText == RENT_MOVIE_TITLE
         assertCartCount(page, 1)
 
-        page = page.getElementById("remove_${repository.findByTitle("Jaws").id}").click()
+        page = page.getElementById("movie_${movieId}").click()
         assert page.titleText == RENT_MOVIE_TITLE
         assertCartCount(page, 0)
 
@@ -65,20 +62,17 @@ class RentMovieTest {
     }
 
     @Test
-    void happyPath_cart_with_multple_items() {
+    void happyPath_cart_with_multiple_items() {
         repository.save(new Movie(title: "Jaws", rating: Rating.G, image: BYTES))
         repository.save(new Movie(title: "Sesame Street", rating: Rating.R, image: BYTES))
 
         HtmlPage page = webClient.getPage(RENTAL_START_URL)
         assert page.titleText == RENT_MOVIE_TITLE
 
-        HtmlTable table = (HtmlTable) page.getElementById("movies")
-
-        assertMovieInRow table, "Jaws", "G", false, 2
-        assertMovieInRow table, "Sesame Street", "R", false, 3
         assertCartCount page, 0
 
-        page = page.getElementById("add_${repository.findByTitle("Jaws").id}").click()
+        final movieId = repository.findByTitle("Jaws").id
+        page = page.getElementById("movie_${movieId}").click()
         assert page.titleText == RENT_MOVIE_TITLE
         assertCartCount(page, 1)
 
@@ -86,7 +80,7 @@ class RentMovieTest {
         assert page.titleText == VIEW_CART_TITLE
         assert page.body.textContent.contains("You are renting 1 item(s).")
 
-        table = (HtmlTable) page.getElementById("movies")
+        HtmlTable table = (HtmlTable) page.getElementById("movies")
         assertRentalInRow table, "Jaws", "G", 2
     }
 

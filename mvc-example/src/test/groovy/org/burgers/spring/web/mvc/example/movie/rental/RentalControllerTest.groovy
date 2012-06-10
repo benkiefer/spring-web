@@ -56,7 +56,7 @@ class RentalControllerTest {
         def session = new MockHttpSession()
         def result = rentalController.selectMovie(session)
         assert result.viewName == "rental/select"
-        assert result.model.movies.movieRentals.contains(rental)
+        assert result.model.movies == [[rental]]
         assert session.getAttribute("cart") instanceof ShoppingCart
     }
 
@@ -79,7 +79,7 @@ class RentalControllerTest {
         session.setAttribute("cart", cart)
         def result = rentalController.selectMovie(session)
         assert result.viewName == "rental/select"
-        assert result.model.movies.movieRentals.contains(rental)
+        assert result.model.movies == [[rental]]
         assert session.getAttribute("cart") == cart
     }
 
@@ -102,7 +102,7 @@ class RentalControllerTest {
         session.setAttribute("cart", cart)
         def result = rentalController.selectMovie(session)
         assert result.viewName == "rental/select"
-        assert result.model.movies.movieRentals.contains(rental)
+        assert result.model.movies == [[rental]]
         assert session.getAttribute("cart") == cart
     }
 
