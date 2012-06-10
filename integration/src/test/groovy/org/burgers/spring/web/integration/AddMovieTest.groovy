@@ -34,7 +34,7 @@ class AddMovieTest {
 
     @Test
     void happyPath(){
-        HtmlPage page = webClient.getPage(HOME_URL + "add.do")
+        HtmlPage page = webClient.getPage(MOVIE_BASE_URL + "add.do")
         assert page.titleText == "Add a Movie"
 
         HtmlInput input = (HtmlInput) page.getElementById("title")
@@ -62,7 +62,7 @@ class AddMovieTest {
 
     @Test
     void validationFailure(){
-        HtmlPage page = webClient.getPage(HOME_URL + "add.do")
+        HtmlPage page = webClient.getPage(MOVIE_BASE_URL + "add.do")
         assert page.titleText == "Add a Movie"
 
         HtmlInput input = (HtmlInput) page.getElementById("title")

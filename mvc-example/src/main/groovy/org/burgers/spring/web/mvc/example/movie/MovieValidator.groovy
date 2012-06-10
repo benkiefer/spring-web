@@ -1,6 +1,5 @@
-package org.burgers.spring.web.mvc.example.movie.admin
+package org.burgers.spring.web.mvc.example.movie
 
-import org.burgers.spring.web.domain.Movie
 import org.burgers.spring.web.domain.Repository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component

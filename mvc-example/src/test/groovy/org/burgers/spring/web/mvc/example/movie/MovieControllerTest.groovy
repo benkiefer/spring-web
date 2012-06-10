@@ -1,4 +1,4 @@
-package org.burgers.spring.web.mvc.example.movie.rental
+package org.burgers.spring.web.mvc.example.movie
 
 import groovy.mock.interceptor.MockFor
 import org.burgers.spring.web.domain.Movie
@@ -8,10 +8,11 @@ import org.junit.Before
 import org.junit.Test
 import org.springframework.validation.BindingResult
 import org.springframework.web.servlet.ModelAndView
-import org.burgers.spring.web.mvc.example.movie.admin.MovieController
-import org.burgers.spring.web.mvc.example.movie.admin.MovieFactory
-import org.burgers.spring.web.mvc.example.movie.admin.MovieValidator
-import org.burgers.spring.web.mvc.example.movie.admin.NewMovie
+import org.burgers.spring.web.mvc.example.movie.MovieController
+import org.burgers.spring.web.mvc.example.movie.MovieFactory
+import org.burgers.spring.web.mvc.example.movie.MovieValidator
+import org.burgers.spring.web.mvc.example.movie.NewMovie
+import org.springframework.mock.web.MockHttpServletRequest
 
 class MovieControllerTest {
     MovieController controller
@@ -32,6 +33,17 @@ class MovieControllerTest {
         controller.repository = mockRepository.proxyInstance()
         controller.validator = mockValidator as MovieValidator
         controller.movieFactory = mockFactory.proxyInstance()
+    }
+
+    @Test
+    void delete(){
+        def movie = new Movie()
+        mockRepository.demand.findById(1){movie}
+        mockRepository.demand.delete(movie){}
+        finalizeSetUp()
+        def request = new MockHttpServletRequest()
+        request.setParameter("movieId", "1")
+        controller.delete(request)
     }
 
     @Test

@@ -3,6 +3,15 @@
 
 <head>
     <title>Movie List</title>
+    <script type="text/javascript">
+        function deleteMovie(id){
+            var url = "<c:url value="/movie/delete.do"/>";
+            $.getJSON(url, {movieId: id}, function(data){
+                $('#movie_' + id).remove();
+            });
+        }
+    </script>
+
 </head>
 
 <body>
@@ -19,11 +28,13 @@
                         <tr>
                             <td class="dataTableColumnHeading">Title:</td>
                             <td class="dataTableColumnHeading">Rating:</td>
+                            <td class="dataTableColumnHeading">&nbsp;</td>
                         <tr>
                         <c:forEach var="movie" items="${movies}" varStatus="status">
-                            <tr class="dataTableRow">
+                            <tr id="movie_${movie.id}" class="dataTableRow">
                                 <td class="dataTableText">${movie.title}</td>
                                 <td class="dataTableText">${movie.rating}</td>
+                                <td class="dataTableText"><input onClick="deleteMovie(${movie.id});" value="Delete" type="submit"/></td>
                             </tr>
                         </c:forEach>
                 </table>

@@ -1,8 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <head>
     <title>Pick a Movie</title>
-    <script type="text/javascript">
-        function update(id) {
+   <script type="text/javascript">
+         function update(id) {
             var selected = $('#movie_' + id).hasClass("selected");
             if (selected){
                remove(id);

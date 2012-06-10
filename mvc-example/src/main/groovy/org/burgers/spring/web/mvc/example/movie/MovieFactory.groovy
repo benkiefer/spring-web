@@ -1,4 +1,4 @@
-package org.burgers.spring.web.mvc.example.movie.admin
+package org.burgers.spring.web.mvc.example.movie
 
 import org.burgers.spring.web.domain.Movie
 import org.springframework.stereotype.Component

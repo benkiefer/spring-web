@@ -36,7 +36,7 @@ class ListMoviesTest {
         repository.save(new Movie(title: "Jaws", rating: Rating.G, image: BYTES))
         repository.save(new Movie(title: "Sesame Street", rating: Rating.R, image: BYTES))
 
-        HtmlPage page = webClient.getPage(HOME_URL + "list.do")
+        HtmlPage page = webClient.getPage(MOVIE_BASE_URL + "list.do")
         assert page.titleText == "Movie List"
 
         HtmlTable table = (HtmlTable) page.getElementById("movies")
@@ -47,7 +47,7 @@ class ListMoviesTest {
 
     @Test
     void happyPath_no_movies(){
-        HtmlPage page = webClient.getPage(HOME_URL + "list.do")
+        HtmlPage page = webClient.getPage(MOVIE_BASE_URL + "list.do")
         assert page.titleText == "Movie List"
 
         assert page.body.textContent.contains("There are currently no movies. Go add one.")

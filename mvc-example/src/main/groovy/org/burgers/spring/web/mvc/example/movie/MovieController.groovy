@@ -1,4 +1,4 @@
-package org.burgers.spring.web.mvc.example.movie.admin
+package org.burgers.spring.web.mvc.example.movie
 
 import org.burgers.spring.web.domain.Rating
 import org.burgers.spring.web.domain.Repository
@@ -7,16 +7,28 @@ import org.springframework.stereotype.Controller
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.servlet.ModelAndView
-import javax.servlet.http.HttpServletResponse
-import org.springframework.web.bind.annotation.RequestParam
+import javax.servlet.http.HttpServletRequest
+import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.ResponseBody
+import javax.servlet.http.HttpSession
+import org.burgers.spring.web.mvc.example.ShoppingCart
 
 @Controller
+@RequestMapping("/movie")
 class MovieController {
     @Autowired Repository repository
     @Autowired MovieValidator validator
     @Autowired MovieFactory movieFactory
+
+
+    @RequestMapping(value = "/delete.do", method = RequestMethod.GET)
+    @ResponseBody delete(HttpServletRequest request) {
+        def movieId = request.getParameter("movieId").toLong()
+        repository.delete(repository.findById(movieId))
+        ""
+    }
 
     @RequestMapping("/list.do")
     ModelAndView listMovies() {
@@ -38,9 +50,6 @@ class MovieController {
     ModelAndView add() {
         new ModelAndView("addMovie", [command: new NewMovie(), ratings: getRatings()])
     }
-
-    @RequestMapping("/options.do")
-    void options() {}
 
     private List getRatings() {
         Rating.collect {it.name()}
