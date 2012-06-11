@@ -43,6 +43,11 @@ class ListMoviesTest {
 
         assertRow 2, "Jaws", "G", table
         assertRow 3, "Sesame Street", "R", table
+
+        def movieId = repository.findByTitle("Jaws").id
+        page = page.getElementById("delete_$movieId").click()
+        table = (HtmlTable) page.getElementById("movies")
+        assertRow 2, "Sesame Street", "R", table
     }
 
     @Test

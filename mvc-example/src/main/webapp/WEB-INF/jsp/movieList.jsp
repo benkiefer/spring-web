@@ -40,7 +40,7 @@
                                 </td>
                                 <td class="dataTableText dataTableTitleColumn">${movie.title}</td>
                                 <td class="dataTableText dataTableRatingColumn">${movie.rating}</td>
-                                <td class="dataTableText dataTableInputColumn"><input onClick="deleteMovie(${movie.id});" value="Delete" type="submit"/></td>
+                                <td class="dataTableText dataTableInputColumn"><input id="delete_${movie.id}" onClick="deleteMovie(${movie.id});" value="Delete" type="submit"/></td>
                             </tr>
                         </c:forEach>
                 </table>

@@ -14,7 +14,7 @@
                 } else{
                   $('#rental_' + id).remove();
                   $('#cartCountText').replaceWith('<p>Your cart is empty.</p>');
-                  $('#movies').hide()
+                  $('#movies').remove()
                 }
             });
         }
