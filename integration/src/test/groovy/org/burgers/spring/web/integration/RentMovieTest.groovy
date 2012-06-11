@@ -82,6 +82,10 @@ class RentMovieTest {
 
         HtmlTable table = (HtmlTable) page.getElementById("movies")
         assertRentalInRow table, "Jaws", "G", 2
+
+        page = page.getElementById("remove_$movieId").click()
+        assert page.titleText == VIEW_CART_TITLE
+        assert page.body.textContent.contains("Your cart is empty.")
     }
 
     private assertRentalInRow(HtmlTable table, String title, String rating, int rowNumber){

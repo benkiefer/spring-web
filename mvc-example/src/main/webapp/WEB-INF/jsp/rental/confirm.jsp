@@ -3,6 +3,23 @@
 
 <head>
     <title>Review Your Cart</title>
+    <script type="text/javascript">
+
+        function remove(id){
+            var url = "<c:url value="/rental/remove.do"/>";
+            $.getJSON(url, {movieId: id}, function(data){
+                if(data > 0){
+                  $('#cartCount').text(data);
+                  $('#rental_' + id).remove();
+                } else{
+                  $('#rental_' + id).remove();
+                  $('#cartCountText').replaceWith('<p>Your cart is empty.</p>');
+                  $('#movies').hide()
+                }
+            });
+        }
+
+    </script>
 </head>
 
 <body>
@@ -12,7 +29,7 @@
 
         <c:choose>
             <c:when test="${fn:length(cart.rentals) gt 0}">
-                <p>You are renting ${cart.itemCount} item(s).</p>
+                <p id="cartCountText">You are renting <span id="cartCount">${cart.itemCount}</span> item(s).</p>
 
                     <table id="movies" class="confirmationTable">
                         <tr>
@@ -24,13 +41,13 @@
 
 
                         <c:forEach var="rental" items="${rentals}" varStatus="index">
-                            <tr class="confirmationTableRow">
+                            <tr id="rental_${rental.id}" class="confirmationTableRow">
                                 <td class="firstColumnOnLeft confirmationTableImageColumn">
                                     <img class="smallImage" src="<c:url value="/rental/image.do?id=${rental.id}"/>"/>
                                 </td>
                                 <td class="confirmationTableTitleColumn">${rental.title}</td>
                                 <td class="confirmationTableRatingColumn">${rental.rating}</td>
-                                <td class="confirmationTableCheckboxColumn"><input type="checkbox"/></td>
+                                <td class="confirmationTableCheckboxColumn"><input id="remove_${rental.id}" type="submit" onClick="remove(${rental.id})" value="Remove"/></td>
                             </tr>
                         </c:forEach>
                     </table>
