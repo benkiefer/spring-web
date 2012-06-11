@@ -24,22 +24,14 @@
 
 
                         <c:forEach var="rental" items="${rentals}" varStatus="index">
-
-                            <c:choose>
-                                <c:when test="${index.count % 2 > 0}">
-                                    <tr class="confirmationTableRow">
-                                </c:when>
-                                <c:otherwise>
-                                    <tr class="confirmationTableRow confirmationTableEven">
-                                </c:otherwise>
-                            </c:choose>
-                                        <td class="firstColumnOnLeft confirmationTableImageColumn">
-                                            <img class="smallImage" src="<c:url value="/rental/image.do?id=${rental.id}"/>"/>
-                                        </td>
-                                        <td class="confirmationTableTitleColumn">${rental.title}</td>
-                                        <td class="confirmationTableRatingColumn">${rental.rating}</td>
-                                        <td class="confirmationTableCheckboxColumn"><input type="checkbox"/></td>
-                                    </tr>
+                            <tr class="confirmationTableRow">
+                                <td class="firstColumnOnLeft confirmationTableImageColumn">
+                                    <img class="smallImage" src="<c:url value="/rental/image.do?id=${rental.id}"/>"/>
+                                </td>
+                                <td class="confirmationTableTitleColumn">${rental.title}</td>
+                                <td class="confirmationTableRatingColumn">${rental.rating}</td>
+                                <td class="confirmationTableCheckboxColumn"><input type="checkbox"/></td>
+                            </tr>
                         </c:forEach>
                     </table>
             </c:when>

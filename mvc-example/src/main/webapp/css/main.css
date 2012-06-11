@@ -90,12 +90,6 @@ p {
     list-style: decimal;
 }
 
-/* #### tables #### */
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
 /* #### forms #### */
 .error {
 	color: #ff0000;
@@ -182,6 +176,14 @@ table {
     padding-left: 5px;
 }
 
+tr:hover {
+    background-color: #F0F0F0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
 
 /* #### confirmation table #### */
 
