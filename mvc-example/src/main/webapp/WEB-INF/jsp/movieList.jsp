@@ -25,16 +25,22 @@
                 <p>Here are the current movies:</p>
 
                 <table id="movies" class="dataTable">
-                        <tr>
-                            <td class="dataTableColumnHeading">Title:</td>
-                            <td class="dataTableColumnHeading">Rating:</td>
-                            <td class="dataTableColumnHeading">&nbsp;</td>
+                        <tr class="dataTableRow">
+                            <td class="dataTableColumnHeading dataTableIdColumn firstColumnOnLeft">Id:</td>
+                            <td class="dataTableColumnHeading dataTableImageColumn">Image:</td>
+                            <td class="dataTableColumnHeading dataTableTitleColumn">Title:</td>
+                            <td class="dataTableColumnHeading dataTableRatingColumn">Rating:</td>
+                            <td class="dataTableColumnHeading dataTableInputColumn">&nbsp;</td>
                         <tr>
                         <c:forEach var="movie" items="${movies}" varStatus="status">
                             <tr id="movie_${movie.id}" class="dataTableRow">
-                                <td class="dataTableText">${movie.title}</td>
-                                <td class="dataTableText">${movie.rating}</td>
-                                <td class="dataTableText"><input onClick="deleteMovie(${movie.id});" value="Delete" type="submit"/></td>
+                                <td class="dataTableText dataTableIdColumn firstColumnOnLeft">${movie.id}</td>
+                                <td class="dataTableText dataTableImageColumn">
+                                    <img class="smallImage" src="<c:url value="/rental/image.do?id=${movie.id}"/>"/>
+                                </td>
+                                <td class="dataTableText dataTableTitleColumn">${movie.title}</td>
+                                <td class="dataTableText dataTableRatingColumn">${movie.rating}</td>
+                                <td class="dataTableText dataTableInputColumn"><input onClick="deleteMovie(${movie.id});" value="Delete" type="submit"/></td>
                             </tr>
                         </c:forEach>
                 </table>

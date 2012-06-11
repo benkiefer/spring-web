@@ -32,7 +32,7 @@
                 </tr>
             </table>
             <br/>
-            <input id="submit" type="submit"/>
+            <input id="submit" type="submit" value="Add"/>
 	    </form:form>
 
 	    <c:if test="${success}">

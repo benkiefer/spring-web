@@ -7,6 +7,10 @@ body {
     color: #000000;
 }
 
+button {
+    padding: 2px 5px 2px 5px;
+}
+
 .pageWidth {
     width: 900px;
     background-color: #ffffff;
@@ -65,11 +69,7 @@ p {
     border: 10px red solid;
 }
 
-.centered {
-}
-
-
-.confirmImage {
+.smallImage {
     width: 25%;
 }
 
@@ -109,11 +109,81 @@ table {
 	margin: 16px;
 }
 
+/* #### data table #### */
+
 .dataTable {
-    border: solid 1px black;
     border-collapse: collapse;
     background-color: #FFFFFF;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+.dataTableColumnHeading {
+    font-weight: bold;
+    background-color: #999999;
+    color: #000000;
+    text-align: left;
+}
+
+.dataTableRow {
+    border-collapse: collapse;
+    text-align: left;
+    vertical-align: center;
+    font-size: 11px;
+}
+
+.dataTableIdColumn{
+    width: 10%;
+    text-align: center;
+}
+
+.dataTableImageColumn{
+    width: 20%;
+    text-align: center;
+}
+
+.dataTableTitleColumn{
+    text-align: left;
+    width: 40%;
+}
+
+.dataTableRatingColumn{
+    text-align: left;
+    width: 20%;
+}
+
+.dataTable td {
+    padding: 5px;
+}
+
+.dataTableEven{
+    background-color: #E0E0E0;
+}
+
+.dataTable tr td {
+    border-collapse: collapse;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+.dataTableText {
+    font-size: 12px;
+    color: #000000;
+}
+
+.dataTableInputColumn{
+    text-align: center;
+    width: 10%;
+}
+
+/* #### common table stuff #### */
+.firstColumnOnLeft {
+    padding-left: 5px;
+}
+
+
+/* #### confirmation table #### */
 
 .confirmationTable {
     border-collapse: collapse;
@@ -128,14 +198,6 @@ table {
     background-color: #999999;
     color: #000000;
     text-align: left;
-}
-
-.dataTableColumnHeading {
-    font-weight: bold;
-    background-color: #999999;
-    color: #000000;
-    text-align: left;
-    border-bottom: solid 1px #000000;
 }
 
 .confirmationTableRow {
@@ -160,47 +222,23 @@ table {
     width: 30%;
 }
 
-.confirmationTableCheckboxColumn{
-    text-align: center;
-    width: 10%;
+.confirmationTable td {
+    padding: 5px;
 }
 
 .confirmationTableEven{
     background-color: #E0E0E0;
 }
 
-
-.dataTableRow {
-    border-collapse: collapse;
-    border: 1px solid #000000;
-    text-align: left;
-    vertical-align: top;
-    font-size: 11px;
-}
-
-.dataTable tr td {
-    border-collapse: collapse;
-    border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+.confirmationTableCheckboxColumn{
+    text-align: center;
+    width: 10%;
 }
 
 .confirmationTable tr td {
     border-collapse: collapse;
     border-top: 1px solid #000000;
     border-bottom: 1px solid #000000;
-}
-
-.dataTable td {
-    padding: 5px;
-}
-
-.confirmationTable td {
-    padding: 5px;
-}
-
-.dataTableText {
-    font-size: 12px;
-    color: #000000;
 }
 
 .confirmationTableText {

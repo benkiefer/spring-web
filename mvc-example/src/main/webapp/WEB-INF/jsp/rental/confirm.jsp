@@ -16,7 +16,7 @@
 
                     <table id="movies" class="confirmationTable">
                         <tr>
-                            <td class="confirmationTableColumnHeading">&nbsp;</td>
+                            <td class="firstColumnOnLeft confirmationTableColumnHeading confirmationTableImageColumn">&nbsp;</td>
                             <td class="confirmationTableColumnHeading confirmationTableTitleColumn">Title:</td>
                             <td class="confirmationTableColumnHeading confirmationTableRatingColumn">Rating:</td>
                             <td class="confirmationTableColumnHeading confirmationTableCheckboxColumn">Remove:</td>
@@ -33,8 +33,8 @@
                                     <tr class="confirmationTableRow confirmationTableEven">
                                 </c:otherwise>
                             </c:choose>
-                                        <td class="confirmationTableImageColumn">
-                                            <img class="confirmImage" src="<c:url value="/rental/image.do?id=${rental.id}"/>"/>
+                                        <td class="firstColumnOnLeft confirmationTableImageColumn">
+                                            <img class="smallImage" src="<c:url value="/rental/image.do?id=${rental.id}"/>"/>
                                         </td>
                                         <td class="confirmationTableTitleColumn">${rental.title}</td>
                                         <td class="confirmationTableRatingColumn">${rental.rating}</td>
