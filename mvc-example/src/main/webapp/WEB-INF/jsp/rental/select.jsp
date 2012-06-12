@@ -61,7 +61,8 @@
 <body onload="updateButtons()">
 
     <div class="contentArea">
-               <p>Want a movie? Click it. Changed your mind? Click it again.</p>
+
+           <p>Want a movie? Click it. Changed your mind? Click it again.</p>
 
                 <c:forEach var="group" items="${movies}">
                     <ul class="movieRentalList">
@@ -75,15 +76,6 @@
                     <br/>
                 </c:forEach>
 
-            <br/>
-
-            <a id="viewCart" href="<c:url value="/rental/cart.do"/>">View Cart</a>
-
-            <br/>
-
-            <div class="shoppingCartCount">
-            	<p>Cart: <span id="cartCount">${cart.itemCount}</span></p></div>
-            </div>
     </div>
 
 </body>

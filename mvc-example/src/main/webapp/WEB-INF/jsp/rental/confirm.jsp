@@ -12,6 +12,7 @@
                   $('#cartCount').text(data);
                   $('#rental_' + id).remove();
                 } else{
+                  $('#cartCount').text(data);
                   $('#rental_' + id).remove();
                   $('#cartCountText').replaceWith('<p>Your cart is empty.</p>');
                   $('#movies').remove()

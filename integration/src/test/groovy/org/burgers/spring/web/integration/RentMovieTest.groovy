@@ -56,7 +56,7 @@ class RentMovieTest {
         assert page.titleText == RENT_MOVIE_TITLE
         assertCartCount(page, 0)
 
-        page = page.getElementById("viewCart").click()
+        page = page.getElementById("Cart").click()
         assert page.titleText == VIEW_CART_TITLE
         assert page.body.textContent.contains("Your cart is empty.")
     }
@@ -76,7 +76,7 @@ class RentMovieTest {
         assert page.titleText == RENT_MOVIE_TITLE
         assertCartCount(page, 1)
 
-        page = page.getElementById("viewCart").click()
+        page = page.getElementById("Cart").click()
         assert page.titleText == VIEW_CART_TITLE
         assert page.body.textContent.contains("You are renting 1 item(s).")
 
