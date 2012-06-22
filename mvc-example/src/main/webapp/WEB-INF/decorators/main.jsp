@@ -20,20 +20,15 @@
     <div class="pageWidth">
 
         <div id="header">
-            <br/>
-            <p class="headerText">White Box Rentals</p>
 
             <div id="navigation">
                 <ul>
                     <li>
                         <a id="Home" href="<c:url value="/options.do"/>">Home</a>
                     </li>
-                    <li>
-                        <a href="/#">TBD</a>
-                    </li>
                 </ul>
                 <c:if test="${cart != null}">
-                    <ul class="right">
+                    <ul id="right">
                         <li>
                             <a id="Cart" href="<c:url value="/rental/cart.do"/>">Cart (<span id="cartCount">${cart.itemCount}</span>)</a>
                         </li>
@@ -41,9 +36,6 @@
                 </c:if>
             </div>
 
-            <br/>
-            <br/>
-            <br/>
         </div>
 
       <decorator:body/>
