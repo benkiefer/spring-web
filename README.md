@@ -12,9 +12,8 @@ Technologies used:
 
 This build requires that you:
  - Have maven set up. (For help, see: http://maven.apache.org/)
- - Have an H2 database server running. (For help, see: http://www.h2database.com/html/main.html)
- - Have my custom maven enforcer rules jar installed in your maven local repo.*
- - Have the following environment variables: DB_URL, DB_USERNAME, DB_PASSWORD
+ - Have a MYSQL database server running. (For help, see: http://www.mysql.com/)
+ - Specify the following environment variables with appropriate values: DB_URL, DB_USERNAME, DB_PASSWORD
 
 To run the app:
 
