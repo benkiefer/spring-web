@@ -11,34 +11,31 @@
 
     <artifactId>spring-web-enforcer-rules</artifactId>
 
+    <properties>
+        <dbUrl>${env.DB_URL}</dbUrl>
+        <dbPassword>${env.DB_PASSWORD}</dbPassword>
+        <dbPassword>${env.DB_USERNAME}</dbPassword>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>1.0.1</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.burgers</groupId>
-                        <artifactId>maven-support-enforcer-rules</artifactId>
-                        <version>1.0</version>
-                    </dependency>
-                </dependencies>
                 <executions>
                     <execution>
+                        <id>enforce-versions</id>
                         <goals>
                             <goal>enforce</goal>
                         </goals>
                         <configuration>
                             <rules>
-                                <environmentVariableRule
-                                        implementation="org.burgers.maven.support.enforcer.rules.EnvironmentVariableExistsRule">
-                                    <environmentVariables>
-                                        <environmentVariable>DB_URL</environmentVariable>
-                                        <environmentVariable>DB_USERNAME</environmentVariable>
-                                        <environmentVariable>DB_PASSWORD</environmentVariable>
-                                    </environmentVariables>
-                                </environmentVariableRule>
+                                <requireProperty>
+                                    <property>dbUrl</property>
+                                    <property>dbUsername</property>
+                                    <property>dbPassword</property>
+                                </requireProperty>
                             </rules>
                         </configuration>
                     </execution>

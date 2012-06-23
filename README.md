@@ -26,4 +26,4 @@ To run the app:
 
 * You can install this jar by building: https://github.com/kingOburgers/maven-support
 
-[![Build Status](https://secure.travis-ci.org/kingOburgers/pdf-processing.png?branch=master)](http://travis-ci.org/kingOburgers/pdf-processing)
+[![Build Status](https://secure.travis-ci.org/kingOburgers/spring-web.png?branch=master)](http://travis-ci.org/kingOburgers/spring-web)
