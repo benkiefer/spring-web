@@ -1,11 +1,9 @@
 env:
-  - DB_USERNAME=user
-  - DB_URL=jdbc:mysql://127.0.0.1/test;
-  - DB_PASSWORD=password
+  - DB_USERNAME=user DB_PASSWORD=password DB_URL=jdbc:mysql://127.0.0.1/test;
 
 before_install:
     - "mysql -e 'create database if not exists test;'"
-    - "mysql -e 'CREATE USER 'user' IDENTIFIED BY 'password';"
+    - "mysql -e 'GRANT ALL ON my_db.* TO 'my_user'@localhost IDENTIFIED BY 'my_pass';'"
 
 language: groovy
 
