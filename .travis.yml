@@ -1,0 +1,15 @@
+language: groovy
+
+before_script:
+    - mysql -e 'create database test;'
+
+env:
+    - DB_USERNAME=root
+    - DB_PASSWORD=
+    - DB_URL=jdbc:mysql://127.0.0.1/test
+
+script: mvn -q clean verify
+
+branches:
+  only:
+    - master
