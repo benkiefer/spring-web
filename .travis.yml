@@ -6,7 +6,12 @@ language: groovy
 env:
   - DB_USERNAME=root DB_URL=jdbc:mysql://127.0.0.1/test; DB_PASSWORD=
 
-script: mvn -q clean verify
+script:
+script:
+    - env | grep DB_USERNAME
+    - mysql --user=root --password=
+    - mysql show databases;
+    - mvn -q clean verify
 
 branches:
   only:
