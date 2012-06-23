@@ -1,7 +1,8 @@
-language: groovy
-
+# .travis.yml
 before_script:
   - mysql -e 'create database test;'
+
+language: groovy
 
 env:
   - DB_USERNAME=root DB_URL=jdbc:mysql://127.0.0.1/test DB_PASSWORD=
