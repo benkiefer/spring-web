@@ -3,10 +3,10 @@ env:
 
 #install phase executes mvn test, which fires the mvn sql plugin execution, so you need a database created.
 before_install:
-    - mysql -e 'create database if not exists test;'
-    - mysql -e "CREATE USER 'user'@'%' IDENTIFIED BY 'password';"
-    - mysql -e 'select User from mysql.user;'
-    - mysql -e "grant all on test.* to 'user'@'%' identified by 'password';"
+    - mysql --user=root --password= -e 'create database if not exists test;'
+    - mysql --user=root --password= -e "CREATE USER 'user'@'%' IDENTIFIED BY 'password';"
+    - mysql --user=root --password= -e 'select User from mysql.user;'
+    - mysql --user=root --password= -e "grant all on test.* to 'user'@'%' identified by 'password';"
 
 
 
