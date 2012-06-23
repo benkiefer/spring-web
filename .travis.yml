@@ -4,8 +4,9 @@ env:
 #install phase executes mvn test, which fires the mvn sql plugin execution, so you need a database created.
 before_install:
     - mysql -e 'create database if not exists test;'
-    - mysql -e '--user=root --password= test'
     - mysql -e "CREATE USER 'user'@'%' IDENTIFIED BY 'password';"
+    - mysql -e 'select User from mysql.user;'
+    - mysql -e '--user=root --password= test;'
     - mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;"
 
 language: groovy
