@@ -6,11 +6,13 @@ import org.springframework.web.servlet.ModelAndView
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import org.apache.log4j.Logger
 
 @Component
 class WebHandlerExceptionResolver implements HandlerExceptionResolver{
+  def logger = Logger.getLogger(this.class)
   ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
-      e.printStackTrace()
+      logger.error(e.message, e)
       new ModelAndView("technicalDifficulties")
   }
 }
