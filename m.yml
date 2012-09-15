@@ -1,0 +1,14 @@
+modules:
+  p: parent
+  d: domain
+  mvc: mvc-example
+  i: integration
+
+commands:
+  - clean
+  - test-compile
+  - install
+  - jetty:run
+  - install
+  - deploy
+
