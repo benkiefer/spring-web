@@ -1,8 +1,13 @@
 package org.burgers.spring.web.integration
 
 import com.gargoylesoftware.htmlunit.WebClient
+import com.gargoylesoftware.htmlunit.html.HtmlFileInput
+import com.gargoylesoftware.htmlunit.html.HtmlInput
 import com.gargoylesoftware.htmlunit.html.HtmlPage
+import com.gargoylesoftware.htmlunit.html.HtmlSelect
+import org.burgers.spring.web.domain.Rating
 import org.burgers.spring.web.domain.Repository
+import org.burgers.spring.web.integration.util.FileUtil
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -11,13 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
-import static org.burgers.spring.web.integration.util.IntegrationConstants.*
+import static org.burgers.spring.web.integration.util.IntegrationConstants.MOVIE_BASE_URL
 import static org.burgers.spring.web.integration.util.IntegrationUtils.cleanDatabase
-import com.gargoylesoftware.htmlunit.html.HtmlSelect
-import com.gargoylesoftware.htmlunit.html.HtmlInput
-import org.burgers.spring.web.domain.Rating
-import com.gargoylesoftware.htmlunit.html.HtmlFileInput
-import org.burgers.spring.web.integration.util.FileUtil
 
 @RunWith(SpringJUnit4ClassRunner)
 @ContextConfiguration(locations=["classpath*:/contexts/DatabaseContext.xml"])

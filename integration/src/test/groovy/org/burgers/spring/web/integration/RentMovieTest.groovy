@@ -1,5 +1,6 @@
 package org.burgers.spring.web.integration
 
+import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController
 import com.gargoylesoftware.htmlunit.WebClient
 import com.gargoylesoftware.htmlunit.html.HtmlPage
 import com.gargoylesoftware.htmlunit.html.HtmlTable
@@ -14,10 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
-import static org.burgers.spring.web.integration.util.IntegrationConstants.*
-import static org.burgers.spring.web.integration.util.IntegrationUtils.*
-import com.gargoylesoftware.htmlunit.html.HtmlInput
-import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController
+import static org.burgers.spring.web.integration.util.IntegrationConstants.RENTAL_START_URL
+import static org.burgers.spring.web.integration.util.IntegrationUtils.cleanDatabase
 
 @RunWith(SpringJUnit4ClassRunner)
 @ContextConfiguration(locations = ["classpath*:/contexts/DatabaseContext.xml"])

@@ -2,9 +2,9 @@ package org.burgers.spring.web.mvc.example.movie
 
 import org.burgers.spring.web.domain.Movie
 import org.burgers.spring.web.domain.Rating
+import org.burgers.spring.web.mvc.example.movie.rental.MovieRentalFactory
 import org.junit.Before
 import org.junit.Test
-import org.burgers.spring.web.mvc.example.movie.rental.MovieRentalFactory
 
 class MovieRentalFactoryTest {
     MovieRentalFactory factory

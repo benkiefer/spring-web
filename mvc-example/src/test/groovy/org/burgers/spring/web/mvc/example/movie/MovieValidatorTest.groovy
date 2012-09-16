@@ -1,20 +1,17 @@
 package org.burgers.spring.web.mvc.example.movie
 
 import groovy.mock.interceptor.MockFor
-
 import org.burgers.spring.web.domain.Rating
 import org.burgers.spring.web.domain.Repository
 import org.junit.Before
 import org.junit.Test
 import org.springframework.validation.BindException
-import org.burgers.spring.web.mvc.example.movie.MovieValidator
-import org.burgers.spring.web.mvc.example.movie.NewMovie
 import org.springframework.web.multipart.MultipartFile
 
 class MovieValidatorTest {
     MovieValidator validator
     private mockRepository
-    NewMovie movie
+    NewMovieForm movie
     BindException exception
     private mockImage
 
@@ -34,7 +31,7 @@ class MovieValidatorTest {
     @Test
     void supports() {
         finalizeSetUp()
-        assert validator.supports(NewMovie)
+        assert validator.supports(NewMovieForm)
         assert !validator.supports(String)
     }
 
@@ -132,7 +129,7 @@ class MovieValidatorTest {
         assert error.defaultMessage == message
     }
 
-    private NewMovie createValidMovie(){
-        new NewMovie(title: "Jaws", rating: Rating.G)
+    private NewMovieForm createValidMovie(){
+        new NewMovieForm(title: "Jaws", rating: Rating.G)
     }
 }

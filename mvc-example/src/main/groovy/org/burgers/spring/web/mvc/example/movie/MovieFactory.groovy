@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class MovieFactory {
-    Movie createFrom(NewMovie addedMovie){
+    Movie createFrom(NewMovieForm addedMovie){
         new Movie(image: addedMovie.image.bytes, title: addedMovie.title, rating: addedMovie.rating)
     }
 }

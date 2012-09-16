@@ -7,13 +7,11 @@ import org.springframework.stereotype.Controller
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.servlet.ModelAndView
-import javax.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseBody
-import javax.servlet.http.HttpSession
-import org.burgers.spring.web.mvc.example.ShoppingCart
+import org.springframework.web.servlet.ModelAndView
+
+import javax.servlet.http.HttpServletRequest
 
 @Controller
 @RequestMapping("/movie")
@@ -36,7 +34,7 @@ class MovieController {
     }
 
     @RequestMapping(value = "/add.do", method = RequestMethod.POST)
-    ModelAndView onSubmit(@ModelAttribute("command") NewMovie movie, BindingResult result) {
+    ModelAndView onSubmit(@ModelAttribute("command") NewMovieForm movie, BindingResult result) {
         validator.validate(movie, result)
         if (result.hasErrors()) {
             return new ModelAndView("addMovie", [command: movie, ratings: getRatings()])
@@ -48,7 +46,7 @@ class MovieController {
 
     @RequestMapping(value = "/add.do", method = RequestMethod.GET)
     ModelAndView add() {
-        new ModelAndView("addMovie", [command: new NewMovie(), ratings: getRatings()])
+        new ModelAndView("addMovie", [command: new NewMovieForm(), ratings: getRatings()])
     }
 
     private List getRatings() {

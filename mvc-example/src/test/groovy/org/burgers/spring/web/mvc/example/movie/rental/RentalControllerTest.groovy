@@ -7,9 +7,8 @@ import org.burgers.spring.web.mvc.example.ShoppingCart
 import org.junit.Before
 import org.junit.Test
 import org.springframework.mock.web.MockHttpServletRequest
-import org.springframework.mock.web.MockHttpSession
-import javax.servlet.http.HttpServletResponse
 import org.springframework.mock.web.MockHttpServletResponse
+import org.springframework.mock.web.MockHttpSession
 
 class RentalControllerTest {
     RentalController rentalController

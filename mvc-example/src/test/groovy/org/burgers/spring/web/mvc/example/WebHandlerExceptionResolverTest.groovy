@@ -1,9 +1,8 @@
 package org.burgers.spring.web.mvc.example
 
-import org.junit.Test
 import groovy.mock.interceptor.MockFor
 import org.junit.Before
-import org.junit.After
+import org.junit.Test
 
 class WebHandlerExceptionResolverTest {
     WebHandlerExceptionResolver resolver

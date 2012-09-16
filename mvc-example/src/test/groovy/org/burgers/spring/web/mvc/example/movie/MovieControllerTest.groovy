@@ -6,13 +6,9 @@ import org.burgers.spring.web.domain.Rating
 import org.burgers.spring.web.domain.Repository
 import org.junit.Before
 import org.junit.Test
+import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.validation.BindingResult
 import org.springframework.web.servlet.ModelAndView
-import org.burgers.spring.web.mvc.example.movie.MovieController
-import org.burgers.spring.web.mvc.example.movie.MovieFactory
-import org.burgers.spring.web.mvc.example.movie.MovieValidator
-import org.burgers.spring.web.mvc.example.movie.NewMovie
-import org.springframework.mock.web.MockHttpServletRequest
 
 class MovieControllerTest {
     MovieController controller
@@ -62,13 +58,13 @@ class MovieControllerTest {
         finalizeSetUp()
         ModelAndView result = controller.add()
         assert result.viewName == "addMovie"
-        assert result.model.command instanceof NewMovie
+        assert result.model.command instanceof NewMovieForm
         assert result.model.ratings == Rating.collect {it.name()}
     }
 
     @Test
     void addMovie(){
-        def addedMovie = new NewMovie(title: "Bob")
+        def addedMovie = new NewMovieForm(title: "Bob")
         def movie = new Movie()
 
         mockBindingResult.demand.hasErrors(){false}
@@ -88,7 +84,7 @@ class MovieControllerTest {
 
     @Test
     void addMovie_with_errors(){
-        def movie = new NewMovie(title: "Bob")
+        def movie = new NewMovieForm(title: "Bob")
 
         mockBindingResult.demand.hasErrors(){true}
 

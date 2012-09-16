@@ -14,11 +14,11 @@ class MovieValidator implements Validator {
     Repository repository
 
     boolean supports(Class<?> aClass) {
-        return NewMovie.isAssignableFrom(aClass);
+        return NewMovieForm.isAssignableFrom(aClass);
     }
 
     void validate(Object target, Errors errors) {
-        NewMovie movie = (NewMovie) target
+        NewMovieForm movie = (NewMovieForm) target
         if (repository.findAllMovieTitles()?.contains(movie.title)){
                     errors.rejectValue("title", "unique.title", "Movie: $movie.title already exists.")
         }
