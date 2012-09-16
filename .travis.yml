@@ -1,7 +1,10 @@
-language: java
+language: groovy
 
 env:
   - DB_USERNAME=root DB_URL=jdbc:mysql://127.0.0.1/test DB=mysql;
+
+jdk:
+  - openjdk6
 
 #Travis install phase executes mvn test, which fires the mvn sql plugin execution.
 #You need a database created before the Travis install phase (see the before_install below).
