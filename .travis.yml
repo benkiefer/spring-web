@@ -1,3 +1,5 @@
+language: groovy
+
 env:
   - DB_USERNAME=user DB_PASSWORD=password DB_URL=jdbc:mysql://127.0.0.1/test;
 
@@ -6,13 +8,11 @@ env:
 #Be aware that by default, travis seems to use a username of vagrant that is not an admin on the database and cant grant permission.
 #Override this by specifying the user/password when executing a command. Don't use the shortened password -p command.
 
-before_script:
+before_install:
     - mysql --user=root --password= -e 'create database if not exists test;'
     - mysql --user=root --password= -e "CREATE USER 'user'@'%' IDENTIFIED BY 'password';"
     - mysql --user=root --password= -e 'select User from mysql.user;'
     - mysql --user=root --password= -e "grant all on *.* to 'user'@'%' identified by 'password';"
-
-language: groovy
 
 script:
     - mvn -q clean verify
