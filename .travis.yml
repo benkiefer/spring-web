@@ -12,8 +12,6 @@ jdk:
 #Override this by specifying the user/password when executing a command. Don't use the shortened password -p command.
 
 before_install:
-    - env | grep DB_USERNAME
-    - env | grep DB_PASSWORD
     - mysql --user=root --password= -e 'create database if not exists test;'
     - mysql --user=root --password= -e "CREATE USER 'user'@'%' IDENTIFIED BY 'password';"
     - mysql --user=root --password= -e 'select User from mysql.user;'
