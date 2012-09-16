@@ -8,5 +8,7 @@ class NewMovieForm {
     @NotEmpty(message = "Title is required.")
     String title
     Rating rating
+
+    @ValidImage
     MultipartFile image
 }
