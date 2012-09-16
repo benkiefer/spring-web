@@ -74,7 +74,7 @@ class AddMovieTest {
 
         assert page.titleText == "Add a Movie"
 
-        assert page.body.textContent.contains("Please select a valid rating.")
+        assert page.body.textContent.contains("Rating is required.")
     }
 
     @After

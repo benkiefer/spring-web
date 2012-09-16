@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.servlet.ModelAndView
 
 import javax.servlet.http.HttpServletRequest
+import javax.validation.Valid
 
 @Controller
 @RequestMapping("/movie")
 class MovieController {
     @Autowired Repository repository
-    @Autowired MovieValidator validator
     @Autowired MovieFactory movieFactory
 
 
@@ -34,8 +34,7 @@ class MovieController {
     }
 
     @RequestMapping(value = "/add.do", method = RequestMethod.POST)
-    ModelAndView onSubmit(@ModelAttribute("command") NewMovieForm movie, BindingResult result) {
-        validator.validate(movie, result)
+    ModelAndView onSubmit(@ModelAttribute("command") @Valid NewMovieForm movie, BindingResult result) {
         if (result.hasErrors()) {
             return new ModelAndView("addMovie", [command: movie, ratings: getRatings()])
         } else {

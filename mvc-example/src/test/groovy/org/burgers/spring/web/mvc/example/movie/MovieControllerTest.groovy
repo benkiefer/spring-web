@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView
 class MovieControllerTest {
     MovieController controller
     private mockRepository
-    private mockValidator = [:]
     private mockBindingResult
     private mockFactory
 
@@ -27,7 +26,6 @@ class MovieControllerTest {
 
     void finalizeSetUp(){
         controller.repository = mockRepository.proxyInstance()
-        controller.validator = mockValidator as MovieValidator
         controller.movieFactory = mockFactory.proxyInstance()
     }
 
@@ -72,7 +70,6 @@ class MovieControllerTest {
         mockFactory.demand.createFrom(addedMovie){movie}
 
         mockRepository.demand.save(movie){}
-        mockValidator = [validate: {arg1, arg2 -> assert arg1 == addedMovie }]
 
         finalizeSetUp()
 
@@ -87,10 +84,6 @@ class MovieControllerTest {
         def movie = new NewMovieForm(title: "Bob")
 
         mockBindingResult.demand.hasErrors(){true}
-
-        mockValidator = [validate: {arg1, arg2 ->
-            assert arg1 == movie
-        }]
 
         finalizeSetUp()
 
