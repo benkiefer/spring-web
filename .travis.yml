@@ -3,6 +3,9 @@ language: groovy
 env:
   - DB_USERNAME=user DB_PASSWORD=password DB_URL=jdbc:mysql://127.0.0.1/test;
 
+jdk:
+  - openjdk6
+
 #Travis install phase executes mvn test, which fires the mvn sql plugin execution.
 #You need a database created before the Travis install phase (see the before_install below).
 #Be aware that by default, travis seems to use a username of vagrant that is not an admin on the database and cant grant permission.
