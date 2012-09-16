@@ -1,7 +1,7 @@
 language: groovy
 
 env:
-  - DB_USERNAME=user DB_PASSWORD=password DB_URL=jdbc:mysql://127.0.0.1/test DB=mysql;
+  - DB_USERNAME=root DB_URL=jdbc:mysql://127.0.0.1/test DB=mysql;
 
 jdk:
   - openjdk6
@@ -12,14 +12,10 @@ jdk:
 #Override this by specifying the user/password when executing a command. Don't use the shortened password -p command.
 
 before_install:
-    - echo $DB
-    - echo $DB_USERNAME
-    - echo $DB_PASSWORD
-    - echo $DB_URL
     - mysql --user=root --password= -e 'create database if not exists test;'
-    - mysql --user=root --password= -e "CREATE USER 'user'@'%' IDENTIFIED BY 'password';"
-    - mysql --user=root --password= -e 'select User from mysql.user;'
-    - mysql --user=root --password= -e "GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;"
+#    - mysql --user=root --password= -e "CREATE USER 'user'@'%' IDENTIFIED BY 'password';"
+#    - mysql --user=root --password= -e 'select User from mysql.user;'
+#    - mysql --user=root --password= -e "GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;"
 
 script:
     - mvn -q clean verify
