@@ -7,7 +7,7 @@
         function deleteMovie(id){
             var url = "<c:url value="/movie/delete.do"/>";
             $.getJSON(url, {movieId: id}, function(data){
-                $('#movie_' + id).remove();
+                $('#movie_' + id).hide("fast");
             });
         }
     </script>
