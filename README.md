@@ -23,6 +23,4 @@ To run the app:
 4. Browse to the home page (http://localhost:8080/mvc-example/)
 5. Have fun.
 
-* You can install this jar by building: https://github.com/benkiefer/maven-support
-
 [![Build Status](https://secure.travis-ci.org/benkiefer/spring-web.png?branch=master)](http://travis-ci.org/benkiefer/spring-web)
